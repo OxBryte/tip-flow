@@ -7,24 +7,24 @@ import { parseUnits, formatUnits } from 'viem';
 
 const BACKEND_URL = (process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:3001').replace(/\/$/, '');
 
-// Fetch EcionBatch contract address for token approvals
-// NOTE: Users must approve the EcionBatch CONTRACT, not the backend wallet!
-let ECION_BATCH_CONTRACT_ADDRESS = '0x0000000000000000000000000000000000000000';
+// Fetch Tip FlowBatch contract address for token approvals
+// NOTE: Users must approve the Tip FlowBatch CONTRACT, not the backend wallet!
+let Tip Flow_BATCH_CONTRACT_ADDRESS = '0x0000000000000000000000000000000000000000';
 
 const fetchBackendWalletAddress = async () => {
   try {
     const response = await fetch(`${BACKEND_URL}/api/backend-wallet`);
     if (response.ok) {
       const data = await response.json();
-      ECION_BATCH_CONTRACT_ADDRESS = data.address; // This is the contract address for approvals
-      console.log('✅ EcionBatch contract address loaded:', ECION_BATCH_CONTRACT_ADDRESS);
+      Tip Flow_BATCH_CONTRACT_ADDRESS = data.address; // This is the contract address for approvals
+      console.log('✅ Tip FlowBatch contract address loaded:', Tip Flow_BATCH_CONTRACT_ADDRESS);
       console.log('ℹ️ Users must approve tokens to the contract, not the backend wallet');
       return data.address;
     }
   } catch (error) {
     console.error('Failed to fetch contract address:', error);
   }
-  return ECION_BATCH_CONTRACT_ADDRESS;
+  return Tip Flow_BATCH_CONTRACT_ADDRESS;
 };
 
 interface UserConfig {
@@ -49,7 +49,7 @@ interface UserConfig {
   lastAllowanceCheck?: number;
 }
 
-export const useEcion = () => {
+export const useTip Flow = () => {
   const { address, isConnected } = useFarcasterWallet();
   const [userConfig, setUserConfig] = useState<UserConfig | null>(null);
   const [tokenBalance, setTokenBalance] = useState<any>(null);
@@ -214,7 +214,7 @@ export const useEcion = () => {
         console.log(`✅ Balance check passed: ${userBalance} >= ${approvalAmount}`);
       }
 
-      // Fetch the latest EcionBatch contract address
+      // Fetch the latest Tip FlowBatch contract address
       const contractAddress = await fetchBackendWalletAddress();
       
       if (contractAddress === '0x0000000000000000000000000000000000000000') {
@@ -223,8 +223,8 @@ export const useEcion = () => {
         return;
       }
       
-      console.log('Approving EXACT amount:', amount, 'tokens to EcionBatch contract');
-      console.log('EcionBatch contract address:', contractAddress);
+      console.log('Approving EXACT amount:', amount, 'tokens to Tip FlowBatch contract');
+      console.log('Tip FlowBatch contract address:', contractAddress);
       console.log('Token address:', tokenAddress);
       
       // Get token decimals from backend
@@ -265,7 +265,7 @@ export const useEcion = () => {
       if (error.message?.includes('User rejected')) {
         toast.error('Transaction cancelled by user', { duration: 2000 });
       } else if (error.message?.includes('zero address')) {
-        toast.error('EcionBatch contract address not configured. Please contact support.', { duration: 2000 });
+        toast.error('Tip FlowBatch contract address not configured. Please contact support.', { duration: 2000 });
       } else {
         toast.error('Failed to approve tokens: ' + error.message, { duration: 2000 });
       }
@@ -281,7 +281,7 @@ export const useEcion = () => {
 
     setIsRevokingAllowance(true);
     try {
-      // Fetch the latest EcionBatch contract address
+      // Fetch the latest Tip FlowBatch contract address
       const contractAddress = await fetchBackendWalletAddress();
       
       if (contractAddress === '0x0000000000000000000000000000000000000000') {
@@ -291,7 +291,7 @@ export const useEcion = () => {
       }
       
       console.log('Revoking allowance for token:', tokenAddress);
-      console.log('Revoking from EcionBatch contract:', contractAddress);
+      console.log('Revoking from Tip FlowBatch contract:', contractAddress);
       
       writeContract({
         address: tokenAddress as `0x${string}`,
@@ -321,7 +321,7 @@ export const useEcion = () => {
       if (error.message?.includes('User rejected')) {
         toast.error('Transaction cancelled by user', { duration: 2000 });
       } else if (error.message?.includes('zero address')) {
-        toast.error('EcionBatch contract address not configured. Please contact support.', { duration: 2000 });
+        toast.error('Tip FlowBatch contract address not configured. Please contact support.', { duration: 2000 });
       } else {
         toast.error('Failed to revoke allowance: ' + error.message, { duration: 2000 });
       }

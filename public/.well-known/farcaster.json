@@ -1,28 +1,22 @@
 {
   "frame": {
     "version": "1",
-    "name": "Ecion",
-    "iconUrl": "https://ecion.vercel.app/icon.png",
-    "homeUrl": "https://ecion.vercel.app",
-    "imageUrl": "https://ecion.vercel.app/image.png",
+    "name": "Tip Flow",
+    "iconUrl": "https://Tip Flow.vercel.app/icon.png",
+    "homeUrl": "https://Tip Flow.vercel.app",
+    "imageUrl": "https://Tip Flow.vercel.app/image.png",
     "buttonTitle": "start tipping",
-    "splashImageUrl": "https://ecion.vercel.app/splash.png",
+    "splashImageUrl": "https://Tip Flow.vercel.app/splash.png",
     "splashBackgroundColor": "#fef3c7",
     "webhookUrl": "https://tippit-production.up.railway.app/webhook/farcaster",
-    "subtitle": "Boost your casts with ecion",
-    "description": "With Ecion you can boost your casts by tipping engagers for their interactions easily.",
+    "subtitle": "Boost your casts with Tip Flow",
+    "description": "With Tip Flow you can boost your casts by tipping engagers for their interactions easily.",
     "primaryCategory": "utility",
-    "tags": [
-      "tip",
-      "tipping",
-      "noice",
-      "ecion",
-      "engage"
-    ],
-    "tagline": "Boost your casts with ecion",
-    "ogTitle": "Ecion – Tip Your Audience",
-    "ogDescription": "With Ecion you can boost your casts by tipping engagers for their interactions easily.",
-    "ogImageUrl": "https://ecion.vercel.app/og-image.png"
+    "tags": ["tip", "tipping", "noice", "Tip Flow", "engage"],
+    "tagline": "Boost your casts with Tip Flow",
+    "ogTitle": "Tip Flow – Tip Your Audience",
+    "ogDescription": "With Tip Flow you can boost your casts by tipping engagers for their interactions easily.",
+    "ogImageUrl": "https://Tip Flow.vercel.app/og-image.png"
   },
   "accountAssociation": {
     "header": "eyJmaWQiOjI0MjU5NywidHlwZSI6ImF1dGgiLCJrZXkiOiIweDNjRjg3Qjc2ZDJBMUQzNkY5NTQyQjREYTJhNkI0QjNEYzBmMEJiMmUifQ",

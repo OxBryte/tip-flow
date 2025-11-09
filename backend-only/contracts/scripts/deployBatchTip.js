@@ -1,17 +1,17 @@
 const hre = require("hardhat");
 
 async function main() {
-  console.log("🚀 Deploying EcionBatchTip contract...");
+  console.log("🚀 Deploying Tip FlowBatchTip contract...");
   
   // Get the contract factory
-  const EcionBatchTip = await hre.ethers.getContractFactory("EcionBatchTip");
+  const Tip FlowBatchTip = await hre.ethers.getContractFactory("Tip FlowBatchTip");
   
   // Deploy the contract
-  const batchTip = await EcionBatchTip.deploy();
+  const batchTip = await Tip FlowBatchTip.deploy();
   await batchTip.waitForDeployment();
   
   const contractAddress = await batchTip.getAddress();
-  console.log(`✅ EcionBatchTip deployed to: ${contractAddress}`);
+  console.log(`✅ Tip FlowBatchTip deployed to: ${contractAddress}`);
   
   // Transfer ownership to backend wallet
   const backendWallet = process.env.BACKEND_WALLET_ADDRESS;

@@ -1,7 +1,7 @@
 {
-  "name": "ecion-batch-contracts",
+  "name": "Tip Flow-batch-contracts",
   "version": "1.0.0",
-  "description": "Ecion batch transfer contracts",
+  "description": "Tip Flow batch transfer contracts",
   "main": "index.js",
   "scripts": {
     "compile": "hardhat compile",

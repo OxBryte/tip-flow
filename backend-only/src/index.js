@@ -48,7 +48,7 @@ const PORT = process.env.PORT || 3001;
 // Middleware - Configure CORS properly
 app.use(cors({
   origin: [
-    'https://ecion.vercel.app',
+    'https://Tip Flow.vercel.app',
     'http://localhost:3000',
     process.env.FRONTEND_DOMAIN
   ].filter(Boolean),
@@ -188,7 +188,7 @@ app.post('/api/create-webhook-direct', async (req, res) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        name: "Ecion Farcaster Events Webhook",
+        name: "Tip Flow Farcaster Events Webhook",
         url: webhookUrl,
         subscription: {
           "cast.created": {},
@@ -454,7 +454,7 @@ app.post('/api/add-all-users-to-webhook', async (req, res) => {
       },
       body: JSON.stringify({
         webhook_id: '01K6EFR9566V9A7CQ7GEQZ5C3Q', // Hardcoded for now
-        name: "Ecion Farcaster Events Webhook",
+        name: "Tip Flow Farcaster Events Webhook",
         url: webhookUrl,
         subscription: {
           "cast.created": {
@@ -526,7 +526,7 @@ app.post('/api/set-webhook-fids', async (req, res) => {
       headers: { 'x-api-key': process.env.NEYNAR_API_KEY, 'Content-Type': 'application/json' },
       body: JSON.stringify({
         webhook_id: webhookId,
-        name: "Ecion Farcaster Events Webhook",
+        name: "Tip Flow Farcaster Events Webhook",
         url: webhookUrl,
         subscription: {
           "cast.created": { 
@@ -580,7 +580,7 @@ app.post('/api/manual-add-fid', async (req, res) => {
       },
       body: JSON.stringify({
         webhook_id: webhookId,
-        name: "Ecion Farcaster Events Webhook",
+        name: "Tip Flow Farcaster Events Webhook",
         url: webhookUrl,
         subscription: {
           "cast.created": {
@@ -646,7 +646,7 @@ async function registerWebhook(req, res) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        name: "Ecion Farcaster Events Webhook",
+        name: "Tip Flow Farcaster Events Webhook",
         url: webhookData.url,
         subscription: {
           "cast.created": {},
@@ -845,7 +845,7 @@ app.post('/api/config', async (req, res) => {
             
               const webhookPayload = {
                 webhook_id: webhookId,
-                name: "Ecion Farcaster Events Webhook",
+                name: "Tip Flow Farcaster Events Webhook",
                 url: `https://${req.get('host')}/webhook/neynar`,
                 subscription: {
                   "cast.created": {
@@ -979,7 +979,7 @@ app.get('/api/check-allowance', async (req, res) => {
     }
     
   const { ethers } = require('ethers');
-    const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+    const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
     
     const tokenContract = new ethers.Contract(tokenAddress, [
       "function allowance(address owner, address spender) view returns (uint256)",
@@ -988,7 +988,7 @@ app.get('/api/check-allowance', async (req, res) => {
     
     // Get both allowance and balance in parallel
     const [allowance, balance] = await Promise.all([
-      tokenContract.allowance(userAddress, ecionBatchAddress),
+      tokenContract.allowance(userAddress, Tip FlowBatchAddress),
       tokenContract.balanceOf(userAddress)
     ]);
     
@@ -1044,7 +1044,7 @@ app.get('/api/allowance-balance/:userAddress/:tokenAddress', async (req, res) =>
 
   try {
     const { ethers } = require('ethers');
-    const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+    const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
     const tokenDecimals = await getTokenDecimals(tokenAddress);
 
     const [allowance, balance] = await executeWithFallback(async (provider) => {
@@ -1054,7 +1054,7 @@ app.get('/api/allowance-balance/:userAddress/:tokenAddress', async (req, res) =>
       ], provider);
 
       return Promise.all([
-        tokenContract.allowance(userAddress, ecionBatchAddress),
+        tokenContract.allowance(userAddress, Tip FlowBatchAddress),
         tokenContract.balanceOf(userAddress)
       ]);
     }, 4);
@@ -1117,14 +1117,14 @@ app.get('/api/allowance/:userAddress/:tokenAddress', async (req, res) => {
 
   try {
     const { ethers } = require('ethers');
-    const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+    const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
     const tokenDecimals = await getTokenDecimals(tokenAddress);
 
     const allowance = await executeWithFallback(async (provider) => {
       const tokenContract = new ethers.Contract(tokenAddress, [
         "function allowance(address owner, address spender) view returns (uint256)"
       ], provider);
-      return tokenContract.allowance(userAddress, ecionBatchAddress);
+      return tokenContract.allowance(userAddress, Tip FlowBatchAddress);
     }, 4);
 
     const formattedAllowance = ethers.formatUnits(allowance, tokenDecimals);
@@ -1138,7 +1138,7 @@ app.get('/api/allowance/:userAddress/:tokenAddress', async (req, res) => {
     allowanceCache.set(cacheKey, entry);
 
     if (process.env.NODE_ENV !== 'production') {
-      console.log(`📊 Blockchain allowance: User ${userAddress} approved ${formattedAllowance} tokens (${tokenAddress}) to EcionBatch contract ${ecionBatchAddress}`);
+      console.log(`📊 Blockchain allowance: User ${userAddress} approved ${formattedAllowance} tokens (${tokenAddress}) to Tip FlowBatch contract ${Tip FlowBatchAddress}`);
     }
 
     res.json({
@@ -1222,14 +1222,14 @@ app.post('/api/approve', async (req, res) => {
           // Check if user has sufficient allowance/balance before adding to webhook
           const { ethers } = require('ethers');
           const provider = await getProvider();
-          const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+          const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
           const tokenContract = new ethers.Contract(tokenAddress, [
             "function allowance(address owner, address spender) view returns (uint256)",
             "function balanceOf(address owner) view returns (uint256)"
           ], provider);
           
           const [allowance, balance] = await Promise.all([
-            tokenContract.allowance(userAddress, ecionBatchAddress),
+            tokenContract.allowance(userAddress, Tip FlowBatchAddress),
             tokenContract.balanceOf(userAddress)
           ]);
           
@@ -1268,7 +1268,7 @@ app.post('/api/approve', async (req, res) => {
         // Check current allowance and balance from blockchain
         const { ethers } = require('ethers');
         const provider = await getProvider(); // Use fallback provider
-        const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+        const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
         
         const tokenContract = new ethers.Contract(tokenAddress, [
           "function allowance(address owner, address spender) view returns (uint256)",
@@ -1276,7 +1276,7 @@ app.post('/api/approve', async (req, res) => {
         ], provider);
         
         const [allowance, balance] = await Promise.all([
-          tokenContract.allowance(userAddress, ecionBatchAddress),
+          tokenContract.allowance(userAddress, Tip FlowBatchAddress),
           tokenContract.balanceOf(userAddress)
         ]);
         
@@ -1359,7 +1359,7 @@ app.post('/api/revoke', async (req, res) => {
         // Check current allowance and balance from blockchain
         const { ethers } = require('ethers');
         const provider = await getProvider(); // Use fallback provider
-        const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+        const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
         
         const tokenContract = new ethers.Contract(tokenAddress, [
           "function allowance(address owner, address spender) view returns (uint256)",
@@ -1367,7 +1367,7 @@ app.post('/api/revoke', async (req, res) => {
         ], provider);
         
         const [allowance, balance] = await Promise.all([
-          tokenContract.allowance(userAddress, ecionBatchAddress),
+          tokenContract.allowance(userAddress, Tip FlowBatchAddress),
           tokenContract.balanceOf(userAddress)
         ]);
         
@@ -1683,13 +1683,13 @@ async function checkTokenAllowance(userAddress, tokenAddress) {
   try {
     const { ethers } = require('ethers');
     const provider = await getProvider(); // Use fallback provider
-    const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+    const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
     
     const tokenContract = new ethers.Contract(tokenAddress, [
       "function allowance(address owner, address spender) view returns (uint256)"
     ], provider);
     
-    const allowance = await tokenContract.allowance(userAddress, ecionBatchAddress);
+    const allowance = await tokenContract.allowance(userAddress, Tip FlowBatchAddress);
     
     // Get token decimals
     const tokenDecimals = tokenAddress.toLowerCase() === '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913' ? 6 : 18;
@@ -1928,7 +1928,7 @@ async function updateNeynarWebhook(webhookFilter) {
       },
       body: JSON.stringify({
         webhook_id: webhookId,
-        name: "Ecion Farcaster Events Webhook",
+        name: "Tip Flow Farcaster Events Webhook",
         url: "https://tippit-production.up.railway.app/webhook/neynar",
         subscription: webhookFilter
       })
@@ -2058,7 +2058,7 @@ async function checkRemovedUsersForBalanceRestoration() {
               user.fid,
               "You're Back!",
               `Your balance is restored! You're now active and can tip your audience again. 🎉`,
-              "https://ecion.vercel.app"
+              "https://Tip Flow.vercel.app"
             );
             console.log(`📧 Sent restoration notification to FID ${user.fid}`);
           } catch (notifError) {
@@ -2177,7 +2177,7 @@ async function checkUserAllowanceForWebhook(userAddress) {
     
     const { ethers } = require('ethers');
     const provider = await getProvider(); // Use fallback provider
-    const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+    const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
     const tokenAddress = userConfig.tokenAddress || '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913';
     
     const tokenContract = new ethers.Contract(tokenAddress, [
@@ -2186,7 +2186,7 @@ async function checkUserAllowanceForWebhook(userAddress) {
     ], provider);
     
     const [allowance, balance] = await Promise.all([
-      tokenContract.allowance(userAddress, ecionBatchAddress),
+      tokenContract.allowance(userAddress, Tip FlowBatchAddress),
       tokenContract.balanceOf(userAddress)
     ]);
     
@@ -2310,7 +2310,7 @@ async function addFidToWebhook(fid) {
       },
       body: JSON.stringify({
         webhook_id: webhookId,
-        name: "Ecion Farcaster Events Webhook",
+        name: "Tip Flow Farcaster Events Webhook",
         url: "https://tippit-production.up.railway.app/webhook/neynar",
         subscription: {
           "reaction.created": { 
@@ -2385,7 +2385,7 @@ async function removeFidFromWebhook(fid) {
       },
       body: JSON.stringify({
         webhook_id: webhookId,
-        name: "Ecion Farcaster Events Webhook",
+        name: "Tip Flow Farcaster Events Webhook",
         url: "https://tippit-production.up.railway.app/webhook/neynar",
         subscription: {
           "reaction.created": { 
@@ -2452,7 +2452,7 @@ async function updateUserWebhookStatus(userAddress) {
     // Check current allowance and balance from blockchain
     const { ethers } = require('ethers');
     const provider = await getProvider(); // Use fallback provider
-    const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+    const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
     
     const tokenAddress = userConfig.tokenAddress || '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913';
     const tokenContract = new ethers.Contract(tokenAddress, [
@@ -2461,7 +2461,7 @@ async function updateUserWebhookStatus(userAddress) {
     ], provider);
     
     const [allowance, balance] = await Promise.all([
-      tokenContract.allowance(userAddress, ecionBatchAddress),
+      tokenContract.allowance(userAddress, Tip FlowBatchAddress),
       tokenContract.balanceOf(userAddress)
     ]);
     
@@ -2506,7 +2506,7 @@ async function updateUserWebhookStatus(userAddress) {
           fid,
           "Allowance Empty",
           "Your token allowance is empty. Please approve more tokens to continue earning tips!",
-          "https://ecion.vercel.app"
+          "https://Tip Flow.vercel.app"
         );
         
         // Mark notification as sent
@@ -2648,7 +2648,7 @@ setInterval(async () => {
 // OLD PERIODIC CLEANUP REMOVED - Now using allowance sync system that updates webhooks every 3 hours
 
 // Send Farcaster notification using stored notification tokens
-async function sendFarcasterNotification(recipientAddress, title, message, targetUrl = "https://ecion.vercel.app") {
+async function sendFarcasterNotification(recipientAddress, title, message, targetUrl = "https://Tip Flow.vercel.app") {
   try {
     // Get notification token for user
     const tokenData = await database.getNotificationToken(recipientAddress);
@@ -2660,7 +2660,7 @@ async function sendFarcasterNotification(recipientAddress, title, message, targe
     const { token, notification_url, fid } = tokenData;
     
     // Generate unique notification ID for deduplication
-    const notificationId = `ecion-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    const notificationId = `Tip Flow-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
     
     console.log(`📱 Sending Farcaster notification to ${recipientAddress} (FID: ${fid}) via ${notification_url}`);
     
@@ -2726,7 +2726,7 @@ async function hasNotificationTokens(userAddress) {
 }
 
 // Legacy function for backward compatibility (now uses Farcaster API)
-async function sendNeynarNotification(recipientFid, title, message, targetUrl = "https://ecion.vercel.app") {
+async function sendNeynarNotification(recipientFid, title, message, targetUrl = "https://Tip Flow.vercel.app") {
   // Get user address from FID
   const userAddress = await getUserAddressFromFid(recipientFid);
   if (!userAddress) {
@@ -2745,7 +2745,7 @@ async function sendNeynarNotification(recipientFid, title, message, targetUrl = 
 }
 
 // Send notification to multiple users using Farcaster API
-async function sendBulkNotification(targetAddresses, title, message, targetUrl = "https://ecion.vercel.app") {
+async function sendBulkNotification(targetAddresses, title, message, targetUrl = "https://Tip Flow.vercel.app") {
   try {
     // Get all notification tokens
     const allTokens = await database.getAllNotificationTokens();
@@ -2775,7 +2775,7 @@ async function sendBulkNotification(targetAddresses, title, message, targetUrl =
     const results = [];
     for (const [url, tokens] of Object.entries(tokensByUrl)) {
       // Generate unique notification ID for deduplication
-      const notificationId = `ecion-bulk-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+      const notificationId = `Tip Flow-bulk-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
       
       const response = await fetch(url, {
         method: 'POST',
@@ -2851,7 +2851,7 @@ async function updateDatabaseAllowance(userAddress, allowanceAmount) {
                 fid,
                 "Allowance Empty",
                 "Approve more USDC to continue tip your audience!",
-                "https://ecion.vercel.app"
+                "https://Tip Flow.vercel.app"
               );
             }
             
@@ -3019,9 +3019,9 @@ async function sendDailyEarningsNotifications() {
         // Send notification
         const success = await sendNeynarNotification(
           fid,
-          "You earned from Ecion in the last 24 hours",
+          "You earned from Tip Flow in the last 24 hours",
           dailyEarningsMessage,
-          "https://ecion.vercel.app"
+          "https://Tip Flow.vercel.app"
         );
         
         if (success) {
@@ -3169,7 +3169,7 @@ async function syncAllUsersAllowancesFromBlockchain() {
     
     const { ethers } = require('ethers');
     const provider = await getProvider(); // Use fallback provider
-    const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+    const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
     
     let syncedCount = 0;
     let errorCount = 0;
@@ -3198,7 +3198,7 @@ async function syncAllUsersAllowancesFromBlockchain() {
           "function allowance(address owner, address spender) view returns (uint256)"
         ], provider);
         
-        const allowance = await allowanceContract.allowance(userAddress, ecionBatchAddress);
+        const allowance = await allowanceContract.allowance(userAddress, Tip FlowBatchAddress);
         const allowanceAmount = parseFloat(ethers.formatUnits(allowance, decimals));
         
         // Update database with blockchain allowance
@@ -3394,7 +3394,7 @@ app.post('/api/sync-all-users-allowance', async (req, res) => {
     
     const { ethers } = require('ethers');
     const provider = await getProvider(); // Use fallback provider
-    const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+    const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
     
     // Get all users with active configurations
     const activeUsers = await database.getActiveUsersWithApprovals();
@@ -3424,7 +3424,7 @@ app.post('/api/sync-all-users-allowance', async (req, res) => {
           "function allowance(address owner, address spender) view returns (uint256)"
         ], provider);
         
-        const allowance = await tokenContract.allowance(userAddress, ecionBatchAddress);
+        const allowance = await tokenContract.allowance(userAddress, Tip FlowBatchAddress);
         const tokenDecimals = await getTokenDecimals(tokenAddress);
         const currentBlockchainAllowance = parseFloat(ethers.formatUnits(allowance, tokenDecimals));
         
@@ -3731,7 +3731,7 @@ app.post('/api/test-bulk-notification', async (req, res) => {
       targetAddresses,
       title,
       message,
-      targetUrl || 'https://ecion.vercel.app'
+      targetUrl || 'https://Tip Flow.vercel.app'
     );
     
     res.json({ 
@@ -3768,7 +3768,7 @@ app.post('/api/test-notification', async (req, res) => {
       userAddress,
       title,
       message,
-      targetUrl || 'https://ecion.vercel.app'
+      targetUrl || 'https://Tip Flow.vercel.app'
     );
     
     res.json({ 
@@ -3942,7 +3942,7 @@ app.get('/api/homepage', async (req, res) => {
     
     const { ethers } = require('ethers');
     const provider = await getProvider(); // Use fallback provider
-    const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+    const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
     
     // Get allowance and cast for each user
     const usersWithAllowance = [];
@@ -3962,7 +3962,7 @@ app.get('/api/homepage', async (req, res) => {
             const tokenContract = new ethers.Contract(tokenAddress, [
               "function allowance(address owner, address spender) view returns (uint256)"
             ], provider);
-            return await tokenContract.allowance(userAddress, ecionBatchAddress);
+            return await tokenContract.allowance(userAddress, Tip FlowBatchAddress);
           });
           allowanceAmount = parseFloat(ethers.formatUnits(allowance, tokenDecimals));
         } catch (error) {
@@ -4422,15 +4422,15 @@ app.get('/api/backend-wallet', (req, res) => {
     const { ethers } = require('ethers');
     const wallet = new ethers.Wallet(process.env.BACKEND_WALLET_PRIVATE_KEY);
     
-    // Return ECION BATCH CONTRACT address for approvals (not backend wallet)
+    // Return Tip Flow BATCH CONTRACT address for approvals (not backend wallet)
     // Users need to approve the contract, not the backend wallet!
-    const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+    const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
     
     res.json({ 
-      address: ecionBatchAddress, // Contract address for token approvals
+      address: Tip FlowBatchAddress, // Contract address for token approvals
       backendWallet: wallet.address, // Backend wallet (executor)
       network: 'Base',
-      note: 'Users must approve the EcionBatch contract, not the backend wallet'
+      note: 'Users must approve the Tip FlowBatch contract, not the backend wallet'
     });
   } catch (error) {
     console.error('Backend wallet fetch error:', error);
@@ -4674,7 +4674,7 @@ app.get('/api/debug/allowance-filtering', async (req, res) => {
     const activeUsers = await database.getActiveUsersWithApprovals();
     const { ethers } = require('ethers');
     const provider = await getProvider(); // Use fallback provider
-    const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+    const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
     
     const filteringResults = [];
     
@@ -4690,7 +4690,7 @@ app.get('/api/debug/allowance-filtering', async (req, res) => {
           "function allowance(address owner, address spender) view returns (uint256)"
         ], provider);
         
-        const allowance = await tokenContract.allowance(userAddress, ecionBatchAddress);
+        const allowance = await tokenContract.allowance(userAddress, Tip FlowBatchAddress);
         const allowanceAmount = parseFloat(ethers.formatUnits(allowance, tokenDecimals));
         
         const likeAmount = parseFloat(userConfig.likeAmount || '0');
@@ -4778,7 +4778,7 @@ app.post('/api/force-update-webhook', async (req, res) => {
     const webhookUrl = `https://${req.get('host')}/webhook/neynar`;
     const webhookPayload = {
       webhook_id: webhookId,
-      name: "Ecion Farcaster Events Webhook",
+      name: "Tip Flow Farcaster Events Webhook",
       url: webhookUrl,
       subscription: {
         "cast.created": {
@@ -5113,7 +5113,7 @@ app.get('/api/fix-active-users-isactive', async (req, res) => {
     
     const { ethers } = require('ethers');
     const provider = await getProvider(); // Use fallback provider
-    const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+    const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
     
     let fixedCount = 0;
     let checkedCount = 0;
@@ -5146,7 +5146,7 @@ app.get('/api/fix-active-users-isactive', async (req, res) => {
         
         const tokenDecimals = await getTokenDecimals(config.tokenAddress);
         const [allowance, balance] = await Promise.all([
-          tokenContract.allowance(userAddress, ecionBatchAddress),
+          tokenContract.allowance(userAddress, Tip FlowBatchAddress),
           tokenContract.balanceOf(userAddress)
         ]);
         
@@ -5274,7 +5274,7 @@ app.get('/api/debug/user-config-allowance', async (req, res) => {
     // Check allowance
     const { ethers } = require('ethers');
     const provider = await getProvider(); // Use fallback provider
-    const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+    const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
     
     let allowance = 0;
     let balance = 0;
@@ -5292,7 +5292,7 @@ app.get('/api/debug/user-config-allowance', async (req, res) => {
       
       const tokenDecimals = await getTokenDecimals(tokenAddress);
       const [allowanceRaw, balanceRaw] = await Promise.all([
-        tokenContract.allowance(userAddress, ecionBatchAddress),
+        tokenContract.allowance(userAddress, Tip FlowBatchAddress),
         tokenContract.balanceOf(userAddress)
       ]);
       
@@ -5348,7 +5348,7 @@ app.get('/api/debug/user-config-allowance', async (req, res) => {
     // Get user config
     const userConfig = await database.getUserConfig(userAddress);
     const tokenAddress = userConfig?.tokenAddress || '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'; // USDC on Base
-    const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+    const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
     
     // Check allowance and balance
     const { ethers } = require('ethers');
@@ -5359,7 +5359,7 @@ app.get('/api/debug/user-config-allowance', async (req, res) => {
     ], provider);
     
     const [allowance, balance] = await Promise.all([
-      tokenContract.allowance(userAddress, ecionBatchAddress),
+      tokenContract.allowance(userAddress, Tip FlowBatchAddress),
       tokenContract.balanceOf(userAddress)
     ]);
     
@@ -5529,7 +5529,7 @@ app.get('/api/debug/user-config-allowance', async (req, res) => {
         <!DOCTYPE html>
         <html>
         <head>
-          <title>Ecion - Farcaster Tipping App</title>
+          <title>Tip Flow - Farcaster Tipping App</title>
           <meta charset="utf-8">
           <meta name="viewport" content="width=device-width, initial-scale=1">
           <style>
@@ -5542,7 +5542,7 @@ app.get('/api/debug/user-config-allowance', async (req, res) => {
         <body>
           <div class="container">
             <div class="card">
-              <h1>🎉 Ecion is Running!</h1>
+              <h1>🎉 Tip Flow is Running!</h1>
               <p>Your Farcaster tipping app is successfully deployed on Railway.</p>
               <p><strong>Backend:</strong> ✅ Active<br>
                  <strong>Database:</strong> ✅ Connected<br>
@@ -5902,7 +5902,7 @@ app.get('/api/share/:fid', async (req, res) => {
       <html>
       <head>
         <meta charset="utf-8">
-        <meta property="og:title" content="Ecion - ${type === 'earnings' ? 'Earnings' : 'Tippings'} ${timeLabel}">
+        <meta property="og:title" content="Tip Flow - ${type === 'earnings' ? 'Earnings' : 'Tippings'} ${timeLabel}">
         <meta property="og:description" content="${userProfile?.username || 'User'} ${type === 'earned' ? 'earned' : 'tipped'} ${amount.toFixed(2)} USDC in ${timeLabel.toLowerCase()}">
         <meta property="og:image" content="data:image/svg+xml;base64,${Buffer.from(`
           <svg width="400" height="200" xmlns="http://www.w3.org/2000/svg">
@@ -5911,12 +5911,12 @@ app.get('/api/share/:fid', async (req, res) => {
             <text x="120" y="80" font-family="Arial" font-size="24" fill="#000">${userProfile?.username || 'User'}</text>
             <text x="120" y="110" font-family="Arial" font-size="18" fill="#000">${type === 'earnings' ? 'Earned' : 'Tipped'}: ${amount.toFixed(2)} USDC</text>
             <text x="120" y="130" font-family="Arial" font-size="16" fill="#000">In ${timeLabel}</text>
-            <text x="200" y="180" font-family="Arial" font-size="14" fill="#000">Ecion</text>
+            <text x="200" y="180" font-family="Arial" font-size="14" fill="#000">Tip Flow</text>
           </svg>
         `).toString('base64')}">
-        <meta property="og:url" content="https://ecion.vercel.app/share/${fid}?time=${time}&type=${type}">
+        <meta property="og:url" content="https://Tip Flow.vercel.app/share/${fid}?time=${time}&type=${type}">
         <meta name="twitter:card" content="summary_large_image">
-        <title>Ecion - ${type === 'earnings' ? 'Earnings' : 'Tippings'} ${timeLabel}</title>
+        <title>Tip Flow - ${type === 'earnings' ? 'Earnings' : 'Tippings'} ${timeLabel}</title>
       </head>
       <body style="margin:0; padding:20px; background:#FFD700; font-family:Arial;">
         <div style="text-align:center;">
@@ -5924,7 +5924,7 @@ app.get('/api/share/:fid', async (req, res) => {
           <h1 style="color:#000; margin:0;">${userProfile?.username || 'User'}</h1>
           <h2 style="color:#000; margin:10px 0;">${type === 'earnings' ? 'Earned' : 'Tipped'}: ${amount.toFixed(2)} USDC</h2>
           <p style="color:#000; margin:0;">In ${timeLabel}</p>
-          <p style="color:#000; margin-top:20px;">Powered by Ecion</p>
+          <p style="color:#000; margin-top:20px;">Powered by Tip Flow</p>
         </div>
       </body>
       </html>
@@ -6009,9 +6009,9 @@ app.get('/api/embed-image/:fid', async (req, res) => {
           ${type === 'earnings' ? 'Earned' : 'Tipped'} in ${timeLabel}
         </text>
         
-        <!-- Ecion Logo -->
+        <!-- Tip Flow Logo -->
         <text x="500" y="350" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#000">
-          Ecion
+          Tip Flow
         </text>
       </svg>
     `;
@@ -7443,21 +7443,21 @@ app.get('/api/debug/db-status', async (req, res) => {
   }
 });
 
-// Debug endpoint to verify EcionBatch contract status
-app.get('/api/debug/ecionbatch-status', async (req, res) => {
+// Debug endpoint to verify Tip FlowBatch contract status
+app.get('/api/debug/Tip Flowbatch-status', async (req, res) => {
   try {
     const { ethers } = require('ethers');
     const provider = await getProvider(); // Use fallback provider
     const wallet = new ethers.Wallet(process.env.BACKEND_WALLET_PRIVATE_KEY, provider);
     
-    const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+    const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
     
     // Check if contract exists
-    const code = await provider.getCode(ecionBatchAddress);
+    const code = await provider.getCode(Tip FlowBatchAddress);
     const contractExists = code !== '0x';
     
     let contractInfo = {
-      address: ecionBatchAddress,
+      address: Tip FlowBatchAddress,
       exists: contractExists,
       backendWallet: wallet.address
     };
@@ -7465,7 +7465,7 @@ app.get('/api/debug/ecionbatch-status', async (req, res) => {
     if (contractExists) {
       try {
         // Check if backend wallet is an executor
-        const contract = new ethers.Contract(ecionBatchAddress, [
+        const contract = new ethers.Contract(Tip FlowBatchAddress, [
           "function isExecutor(address executor) external view returns (bool)",
           "function owner() public view virtual returns (address)"
         ], provider);
@@ -7487,19 +7487,19 @@ app.get('/api/debug/ecionbatch-status', async (req, res) => {
     res.json({
       success: true,
       contract: contractInfo,
-      note: 'EcionBatch supports all ERC20 tokens via tokens[] parameter',
+      note: 'Tip FlowBatch supports all ERC20 tokens via tokens[] parameter',
       timestamp: new Date().toISOString()
     });
   } catch (error) {
-    console.error('Error checking EcionBatch status:', error);
-    res.status(500).json({ error: 'Failed to check EcionBatch status' });
+    console.error('Error checking Tip FlowBatch status:', error);
+    res.status(500).json({ error: 'Failed to check Tip FlowBatch status' });
   }
 });
 
 // Start server when executed directly
 if (require.main === module) {
   app.listen(PORT, () => {
-    console.log(`🚀 Ecion Backend running on port ${PORT}`);
+    console.log(`🚀 Tip Flow Backend running on port ${PORT}`);
     console.log(`📊 Environment: ${process.env.NODE_ENV}`);
     console.log(`⏰ Batch interval: ${process.env.BATCH_INTERVAL_MINUTES || 1} minutes`);
     if (process.env.NODE_ENV === 'production') {
@@ -7767,7 +7767,7 @@ const restoreDeletedUsersHandler = async (req, res) => {
       },
       body: JSON.stringify({
         webhook_id: webhookId,
-        name: "Ecion Farcaster Events Webhook",
+        name: "Tip Flow Farcaster Events Webhook",
         url: `https://${req.get('host')}/webhook/neynar`,
         subscription: {
           "reaction.created": { 
@@ -7962,7 +7962,7 @@ app.post('/api/admin/reconcile-active-users', async (req, res) => {
       ? req.body.fids.map(fid => parseInt(fid, 10)).filter(Number.isFinite)
       : [];
 
-    const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+    const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
     const trackedFids = await database.getTrackedFids();
     const trackedSet = new Set(trackedFids.map(Number));
 
@@ -8043,7 +8043,7 @@ app.post('/api/admin/reconcile-active-users', async (req, res) => {
             "function balanceOf(address owner) view returns (uint256)"
           ], provider);
           return Promise.all([
-            tokenContract.allowance(userAddress, ecionBatchAddress),
+            tokenContract.allowance(userAddress, Tip FlowBatchAddress),
             tokenContract.balanceOf(userAddress)
           ]);
         }, 4);

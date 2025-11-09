@@ -21,7 +21,7 @@ const { executeWithFallback } = require('../src/rpcProvider');
 const { addFidToWebhook } = require('../src/index');
 
 const BASE_USDC_ADDRESS = '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913';
-const ECION_BATCH_ADDRESS = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+const Tip Flow_BATCH_ADDRESS = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
 
 const TOKEN_DECIMALS = {
   '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913': 6, // USDC
@@ -61,7 +61,7 @@ async function getAllowanceAndBalance(tokenAddress, userAddress) {
     ], provider);
 
     return Promise.all([
-      tokenContract.allowance(userAddress, ECION_BATCH_ADDRESS),
+      tokenContract.allowance(userAddress, Tip Flow_BATCH_ADDRESS),
       tokenContract.balanceOf(userAddress)
     ]);
   }, 4);

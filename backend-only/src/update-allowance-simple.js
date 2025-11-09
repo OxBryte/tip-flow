@@ -27,7 +27,7 @@ async function updateAllowanceSimple(req, res, database, batchTransferManager) {
     
     // Get current allowance and balance from blockchain - single call for both
     const provider = await getProvider();
-    const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+    const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
     
     const tokenContract = new ethers.Contract(tokenAddress, [
       "function allowance(address owner, address spender) view returns (uint256)",
@@ -35,7 +35,7 @@ async function updateAllowanceSimple(req, res, database, batchTransferManager) {
     ], provider);
     
     const [allowance, balance] = await Promise.all([
-      tokenContract.allowance(userAddress, ecionBatchAddress),
+      tokenContract.allowance(userAddress, Tip FlowBatchAddress),
       tokenContract.balanceOf(userAddress)
     ]);
     

@@ -1,14 +1,14 @@
-// EcionBatch Manager - Simple batch tipping system
-// Based on the EcionBatch contract (no fees, no NFTs)
+// Tip FlowBatch Manager - Simple batch tipping system
+// Based on the Tip FlowBatch contract (no fees, no NFTs)
 
 const { ethers } = require('ethers');
 
-class EcionBatchManager {
+class Tip FlowBatchManager {
   constructor(provider, wallet) {
     this.provider = provider;
     this.wallet = wallet;
     
-    // EcionBatch contract ABI (from deployed contract)
+    // Tip FlowBatch contract ABI (from deployed contract)
     this.contractABI = [
       {
         "inputs": [],
@@ -147,17 +147,17 @@ class EcionBatchManager {
     ];
     
     // Contract address (deployed on Base)
-    this.contractAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+    this.contractAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
   }
   
   /**
-   * Execute batch tips using EcionBatch contract
+   * Execute batch tips using Tip FlowBatch contract
    * @param {Array} tips - Array of tip objects
    * @returns {Promise<Object>} - Transaction result
    */
   async executeBatchTips(tips) {
     try {
-      console.log(`🎯 Executing batch tips with EcionBatch: ${tips.length} tips`);
+      console.log(`🎯 Executing batch tips with Tip FlowBatch: ${tips.length} tips`);
       
       // Create contract instance (will be recreated if provider switches)
       let contract = new ethers.Contract(
@@ -224,7 +224,7 @@ class EcionBatchManager {
         try {
           isExecutor = await contract.isExecutor(this.wallet.address);
           if (!isExecutor) {
-            throw new Error('Backend wallet is not an executor on EcionBatch contract');
+            throw new Error('Backend wallet is not an executor on Tip FlowBatch contract');
           }
           console.log(`✅ Backend wallet is verified as executor: ${this.wallet.address}`);
           break;
@@ -715,7 +715,7 @@ class EcionBatchManager {
             success: true,
             hash: tx.hash,
             gasUsed: receipt.gasUsed.toString(),
-            type: 'ecion_batch',
+            type: 'Tip Flow_batch',
             results: successResults,
             successfulCount: successfulTips.length,
             failedCount: failedTips.length
@@ -740,14 +740,14 @@ class EcionBatchManager {
             success: true,
             hash: tx.hash,
             gasUsed: receipt.gasUsed.toString(),
-            type: 'ecion_batch',
+            type: 'Tip Flow_batch',
             results: successResults,
             successfulCount: successResults.length,
             failedCount: 0
           };
         }
       } else {
-        console.log(`❌ EcionBatch transaction reverted: ${tx.hash} (Status: ${receipt.status})`);
+        console.log(`❌ Tip FlowBatch transaction reverted: ${tx.hash} (Status: ${receipt.status})`);
         console.log(`❌ REVERT ANALYSIS:`);
         console.log(`  🔗 Transaction: https://basescan.org/tx/${tx.hash}`);
         console.log(`  ⛽ Gas Used: ${receipt.gasUsed.toString()}`);
@@ -764,7 +764,7 @@ class EcionBatchManager {
       }
       
     } catch (error) {
-      console.log(`❌ EcionBatch batch tip failed: ${error.message}`);
+      console.log(`❌ Tip FlowBatch batch tip failed: ${error.message}`);
       console.log(`❌ Error details:`, {
         name: error.name,
         code: error.code,
@@ -819,26 +819,26 @@ class EcionBatchManager {
    */
   async isContractReady() {
     try {
-      console.log(`🔍 Checking EcionBatch contract: ${this.contractAddress}`);
+      console.log(`🔍 Checking Tip FlowBatch contract: ${this.contractAddress}`);
       console.log(`🔍 Backend wallet: ${this.wallet.address}`);
       
       if (this.contractAddress === '0x0000000000000000000000000000000000000000') {
-        console.log(`❌ EcionBatch contract address not set`);
+        console.log(`❌ Tip FlowBatch contract address not set`);
         return false;
       }
       
       // FORCE RETURN TRUE - Contract was working 27 hours ago
-      console.log(`🚨 FORCING EcionBatch to be ready - Contract worked 27 hours ago!`);
-      console.log(`✅ EcionBatch contract FORCED ready: ${this.contractAddress}`);
+      console.log(`🚨 FORCING Tip FlowBatch to be ready - Contract worked 27 hours ago!`);
+      console.log(`✅ Tip FlowBatch contract FORCED ready: ${this.contractAddress}`);
       return true;
       
     } catch (error) {
-      console.log(`❌ EcionBatch contract not ready: ${error.message}`);
+      console.log(`❌ Tip FlowBatch contract not ready: ${error.message}`);
       // Even if there's an error, force it to work since it was working before
-      console.log(`🚨 FORCING EcionBatch despite error - Contract worked 27 hours ago!`);
+      console.log(`🚨 FORCING Tip FlowBatch despite error - Contract worked 27 hours ago!`);
       return true;
     }
   }
 }
 
-module.exports = EcionBatchManager;
+module.exports = Tip FlowBatchManager;

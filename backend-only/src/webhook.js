@@ -249,7 +249,7 @@ async function webhookHandler(req, res) {
       const { ethers } = require('ethers');
       const { getProvider } = require('./rpcProvider');
       const provider = await getProvider();
-      const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+      const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
       const tokenAddress = authorConfig.tokenAddress || BASE_USDC_ADDRESS;
       
       try {
@@ -259,7 +259,7 @@ async function webhookHandler(req, res) {
         ], provider);
         
         const [allowance, balance] = await Promise.all([
-          tokenContract.allowance(interaction.authorAddress, ecionBatchAddress),
+          tokenContract.allowance(interaction.authorAddress, Tip FlowBatchAddress),
           tokenContract.balanceOf(interaction.authorAddress)
         ]);
         

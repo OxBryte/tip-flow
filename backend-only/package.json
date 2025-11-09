@@ -1,7 +1,7 @@
 {
-  "name": "ecion-backend",
+  "name": "Tip Flow-backend",
   "version": "1.0.0",
-  "description": "Ecion Backend - Backend-only tipping system like Noice",
+  "description": "Tip Flow Backend - Backend-only tipping system like Noice",
   "main": "src/index.js",
   "engines": {
     "node": ">=18.20.5"

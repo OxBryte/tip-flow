@@ -1,15 +1,17 @@
-# Ecion Backend - Backend-Only Tipping System
+# Tip Flow Backend - Backend-Only Tipping System
 
 Backend-only tipping system that works exactly like Noice but with additional features.
 
 ## How It Works
 
 ### 1. User Approval Process
+
 - Users approve USDC (or any token) to backend wallet address
 - Backend wallet holds approved tokens
 - Backend processes all tips from its own wallet
 
 ### 2. Features (All Backend-Only)
+
 ✅ **Tipping amounts** (0.01, 0.025 USDC, etc.)
 ✅ **Toggle switches** (like/reply/recast on/off)
 ✅ **Audience filtering** (Following/Followers/Anyone)
@@ -20,23 +22,26 @@ Backend-only tipping system that works exactly like Noice but with additional fe
 ✅ **Spending limits** (max per user)
 
 ### 3. 1-Minute Batch Processing (EXACTLY LIKE NOICE)
+
 ```
 Minute 1: Collect 50 tips → Send 1 transaction with 50 transfers
-Minute 2: Collect 30 tips → Send 1 transaction with 30 transfers  
+Minute 2: Collect 30 tips → Send 1 transaction with 30 transfers
 Minute 3: Collect 80 tips → Send 1 transaction with 80 transfers
 ```
 
 **Example Noice Transaction:**
+
 - Transaction Hash: `0x470cbadbd6a58f7ff736c8768daf9de8076ea1d08c1fac3aebc028ba3c0dd8b5`
 - **24 ERC-20 transfers** in ONE transaction
 - Gas used: 578,721 (15.23% of 3.8M limit)
 - Function: `multiTransfer(address[] recipients, uint256[] amounts)`
 
 ### 4. Validation Examples (ALL MUST PASS)
+
 ```
 Caster Settings:
 - Follower Count: 50 minimum
-- Neynar Score: 0.7 minimum  
+- Neynar Score: 0.7 minimum
 - Audience: "Following" only
 
 Engager A (FID: 123):
@@ -67,11 +72,13 @@ Engager D (FID: 999):
 ## Setup
 
 ### 1. Environment Variables
+
 ```bash
 cp .env.example .env
 ```
 
 Fill in:
+
 - `BACKEND_WALLET_PRIVATE_KEY` - Your backend wallet private key
 - `BACKEND_WALLET_ADDRESS` - Your backend wallet address
 - `BASE_RPC_URL` - Your Alchemy Base RPC URL
@@ -79,11 +86,13 @@ Fill in:
 - `WEBHOOK_SECRET` - Random secret for webhook verification
 
 ### 2. Install Dependencies
+
 ```bash
 npm install
 ```
 
 ### 3. Run
+
 ```bash
 npm start
 # or for development
@@ -93,27 +102,32 @@ npm run dev
 ## API Endpoints
 
 ### Webhook
+
 - `POST /webhook/neynar` - Receives Neynar webhooks
 
 ### User Configuration
+
 - `POST /api/config` - Set user tipping configuration
 - `GET /api/config/:userAddress` - Get user configuration
 
 ### History
+
 - `GET /api/history/:userAddress` - Get user tip history
 
 ### Health
+
 - `GET /health` - Health check
 
 ## Database Structure
 
 ### User Config
+
 ```json
 {
   "userAddress": "0x123...",
   "tokenAddress": "0xUSDC...",
   "likeAmount": "0.01",
-  "replyAmount": "0.025", 
+  "replyAmount": "0.025",
   "likeEnabled": true,
   "replyEnabled": true,
   "audience": "Anyone",
@@ -125,6 +139,7 @@ npm run dev
 ```
 
 ### Pending Tips
+
 ```json
 {
   "authorAddress": "0x123...",
@@ -141,12 +156,14 @@ npm run dev
 ## Deployment
 
 ### Railway
+
 1. Create new Railway project
 2. Connect GitHub repository
 3. Set environment variables
 4. Deploy
 
 ### VPS
+
 1. Upload code to server
 2. Install Node.js 18+
 3. Set environment variables
@@ -155,17 +172,20 @@ npm run dev
 ## How Backend Handles Everything
 
 ### 1. User Configuration
+
 - Stored in JSON files (or MongoDB)
 - All tipping rules, amounts, toggles, audience settings
 - Spending limits and tracking
 
 ### 2. Neynar Integration
+
 - Receives webhooks for all Farcaster interactions
 - Validates interactions against user configurations
 - Checks follower counts via Neynar API
 - Validates audience criteria (following/followers/anyone)
 
 ### 3. Batch Processing
+
 - Collects tips for 1 minute
 - Validates all tips (amounts, limits, criteria)
 - Groups by token type
@@ -173,6 +193,7 @@ npm run dev
 - Updates user spending totals
 
 ### 4. Token Management
+
 - Backend wallet holds all approved tokens
 - Users approve tokens to backend wallet address
 - Backend sends tokens directly to engagers

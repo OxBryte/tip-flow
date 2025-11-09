@@ -1,6 +1,6 @@
 const { ethers } = require('ethers');
 const BatchTipManager = require('./batchTipManager');
-const EcionBatchManager = require('./ecionBatchManager');
+const Tip FlowBatchManager = require('./Tip FlowBatchManager');
 const { getProvider, executeWithFallback } = require('./rpcProvider');
 
 // Token decimals mapping (to avoid circular dependency) - all lowercase keys
@@ -33,7 +33,7 @@ class BatchTransferManager {
     this.provider = null;
     this.wallet = null;
     this.batchTipManager = null;
-    this.ecionBatchManager = null;
+    this.Tip FlowBatchManager = null;
     
     // Initialize provider asynchronously
     this.initializeProviders();
@@ -62,7 +62,7 @@ class BatchTransferManager {
       
       // Initialize batch managers with provider
       this.batchTipManager = new BatchTipManager(this.provider, this.wallet);
-      this.ecionBatchManager = new EcionBatchManager(this.provider, this.wallet);
+      this.Tip FlowBatchManager = new Tip FlowBatchManager(this.provider, this.wallet);
       
       // Start batch processing timer after providers are ready
       this.startBatchTimer();
@@ -101,7 +101,7 @@ class BatchTransferManager {
       // Get REAL blockchain allowance (most accurate) with fallback provider
       const { ethers } = require('ethers');
       const provider = await getProvider(); // Use provider with fallback
-      const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+      const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
       
       // Force USDC token address for now to fix decimal issue
       const tokenAddress = userConfig.tokenAddress || '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913';
@@ -109,7 +109,7 @@ class BatchTransferManager {
         "function allowance(address owner, address spender) view returns (uint256)"
       ], provider);
       
-      const allowance = await tokenContract.allowance(userAddress, ecionBatchAddress);
+      const allowance = await tokenContract.allowance(userAddress, Tip FlowBatchAddress);
       const tokenDecimals = getTokenDecimals(tokenAddress);
       const allowanceAmount = parseFloat(ethers.formatUnits(allowance, tokenDecimals));
       
@@ -143,7 +143,7 @@ class BatchTransferManager {
       // Get allowance directly from blockchain
       const { ethers } = require('ethers');
       const provider = await getProvider(); // Use provider with fallback
-      const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+      const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
       
       // Force USDC token address for now to fix decimal issue
       const tokenAddress = userConfig.tokenAddress || '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913';
@@ -151,7 +151,7 @@ class BatchTransferManager {
         "function allowance(address owner, address spender) view returns (uint256)"
       ], provider);
       
-      const allowance = await tokenContract.allowance(userAddress, ecionBatchAddress);
+      const allowance = await tokenContract.allowance(userAddress, Tip FlowBatchAddress);
       const tokenDecimals = getTokenDecimals(tokenAddress);
       
       console.log(`🔍 DEBUG checkBlockchainAllowance for ${userAddress}:`);
@@ -201,7 +201,7 @@ class BatchTransferManager {
       
       const { ethers } = require('ethers');
       const provider = await getProvider(); // Use provider with fallback
-      const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+      const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
       
       const tokenContract = new ethers.Contract(tokenAddress, [
         "function allowance(address owner, address spender) view returns (uint256)",
@@ -210,7 +210,7 @@ class BatchTransferManager {
       
       // Get both allowance and balance in parallel
       const [allowance, balance] = await Promise.all([
-        tokenContract.allowance(userAddress, ecionBatchAddress),
+        tokenContract.allowance(userAddress, Tip FlowBatchAddress),
         tokenContract.balanceOf(userAddress)
       ]);
       
@@ -364,16 +364,16 @@ class BatchTransferManager {
     }
     
     // Ensure provider is initialized
-    if (!this.provider || !this.ecionBatchManager) {
+    if (!this.provider || !this.Tip FlowBatchManager) {
       console.log(`⏳ Waiting for provider initialization...`);
       await this.initializeProviders();
       // Wait a bit for provider to be ready
       let retries = 0;
-      while ((!this.provider || !this.ecionBatchManager) && retries < 10) {
+      while ((!this.provider || !this.Tip FlowBatchManager) && retries < 10) {
         await new Promise(resolve => setTimeout(resolve, 500));
         retries++;
       }
-      if (!this.provider || !this.ecionBatchManager) {
+      if (!this.provider || !this.Tip FlowBatchManager) {
         console.log(`❌ Provider not initialized - skipping batch`);
         return;
       }
@@ -446,9 +446,9 @@ class BatchTransferManager {
     let failed = 0;
 
     try {
-      console.log(`🎯 EXECUTING ${tips.length} TIPS USING ONLY ECIONBATCH CONTRACT: 0x2f47bcc17665663d1b63e8d882faa0a366907bb8`);
+      console.log(`🎯 EXECUTING ${tips.length} TIPS USING ONLY Tip FlowBATCH CONTRACT: 0x2f47bcc17665663d1b63e8d882faa0a366907bb8`);
       
-      // Prepare transfer data for EcionBatch - ALL tips in one batch
+      // Prepare transfer data for Tip FlowBatch - ALL tips in one batch
       const transfers = tips.map(tip => ({
         tokenAddress: tip.tokenAddress,
         from: tip.interaction.authorAddress,
@@ -456,12 +456,12 @@ class BatchTransferManager {
         amount: tip.amount
       }));
 
-      const tipData = this.ecionBatchManager.prepareTokenTips(transfers);
-      const results = await this.ecionBatchManager.executeBatchTips(tipData);
+      const tipData = this.Tip FlowBatchManager.prepareTokenTips(transfers);
+      const results = await this.Tip FlowBatchManager.executeBatchTips(tipData);
       
-      console.log(`✅ EcionBatch successful: ${results.successfulCount || results.results.length} tips processed`);
+      console.log(`✅ Tip FlowBatch successful: ${results.successfulCount || results.results.length} tips processed`);
       if (results.failedCount > 0) {
-        console.log(`❌ EcionBatch had ${results.failedCount} failed tips`);
+        console.log(`❌ Tip FlowBatch had ${results.failedCount} failed tips`);
       }
       
       // Update database for all successful tips
@@ -491,13 +491,13 @@ class BatchTransferManager {
               // Get current blockchain allowance and update database with it (using fallback provider)
               const { ethers } = require('ethers');
               const provider = await getProvider(); // Use provider with fallback
-              const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+              const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
               
               const tokenContract = new ethers.Contract(tip.tokenAddress, [
                 "function allowance(address owner, address spender) view returns (uint256)"
               ], provider);
               
-              const allowance = await tokenContract.allowance(tip.interaction.authorAddress, ecionBatchAddress);
+              const allowance = await tokenContract.allowance(tip.interaction.authorAddress, Tip FlowBatchAddress);
               const tokenDecimals = tip.tokenAddress === '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913' ? 6 : 18;
               const currentBlockchainAllowance = parseFloat(ethers.formatUnits(allowance, tokenDecimals));
               
@@ -548,7 +548,7 @@ class BatchTransferManager {
                         userFid,
                         "Insufficient Balance",
                         `Your token balance is too low to continue tipping. Please add more tokens to continue earning tips!`,
-                        "https://ecion.vercel.app"
+                        "https://Tip Flow.vercel.app"
                       );
                       console.log(`📧 Sent low balance notification to FID ${userFid}`);
                     } catch (notifError) {
@@ -576,8 +576,8 @@ class BatchTransferManager {
       }
 
     } catch (error) {
-      console.error('❌ EcionBatch transfer failed:', error);
-      failed = tips.length; // All tips failed if EcionBatch fails
+      console.error('❌ Tip FlowBatch transfer failed:', error);
+      failed = tips.length; // All tips failed if Tip FlowBatch fails
     }
 
     console.log(`✅ Batch processing complete: ${processed} processed, ${failed} failed`);
@@ -819,17 +819,17 @@ class BatchTransferManager {
         "function allowance(address owner, address spender) view returns (uint256)"
       ], provider);
       
-      // Check allowance for ECION BATCH CONTRACT, not backend wallet!
-      const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+      // Check allowance for Tip Flow BATCH CONTRACT, not backend wallet!
+      const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
       
-      const allowance = await tokenContract.allowance(userAddress, ecionBatchAddress);
+      const allowance = await tokenContract.allowance(userAddress, Tip FlowBatchAddress);
       const formattedAllowance = parseFloat(ethers.formatUnits(allowance, 6)); // USDC has 6 decimals
       
       // Also get balance for logging
       const balance = await tokenContract.balanceOf(userAddress);
       const formattedBalance = parseFloat(ethers.formatUnits(balance, 6));
       
-      console.log(`💰 Allowance check: User ${userAddress} has ${formattedAllowance} approved and ${formattedBalance} balance for contract ${ecionBatchAddress}`);
+      console.log(`💰 Allowance check: User ${userAddress} has ${formattedAllowance} approved and ${formattedBalance} balance for contract ${Tip FlowBatchAddress}`);
       
       return formattedAllowance;
     } catch (error) {
@@ -853,14 +853,14 @@ class BatchTransferManager {
       
       const { ethers } = require('ethers');
       const provider = await getProvider(); // Use provider with fallback
-      const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+      const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
       
       const tokenContract = new ethers.Contract(tokenAddress, [
         "function approve(address spender, uint256 amount) returns (bool)"
       ], provider);
       
       // Revoke allowance by setting it to 0
-      const tx = await tokenContract.approve(ecionBatchAddress, 0);
+      const tx = await tokenContract.approve(Tip FlowBatchAddress, 0);
       console.log(`📝 Revoke transaction sent: ${tx.hash}`);
       
       // Wait for confirmation

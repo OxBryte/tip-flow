@@ -10,12 +10,14 @@ Added a new API endpoint to check token allowances for 23 FIDs and a specific ad
 
 **Location**: `backend-only/src/index.js`
 
-**Purpose**: 
+**Purpose**:
+
 - Check token allowances and balances for 23 specific FIDs
 - Check token allowance for specific address: `0x275aB0037e50BDA1cdA147e3Ac9AeaeFB3D21E85`
 - Automatically add users back to webhook (`follow.created`) if they have sufficient funds
 
 **The 23 FIDs Checked**:
+
 ```
 249432, 15086, 250869, 564447, 1052964, 200375, 849116, 1161826,
 520364, 1351395, 1007471, 1104000, 507756, 243108, 306502, 963470,
@@ -23,7 +25,9 @@ Added a new API endpoint to check token allowances for 23 FIDs and a specific ad
 ```
 
 **How It Works**:
+
 1. For each FID:
+
    - Gets user address from database
    - Retrieves user config (token address, tip amounts)
    - Calculates `minTip` = `likeAmount + recastAmount + replyAmount`
@@ -39,6 +43,7 @@ Added a new API endpoint to check token allowances for 23 FIDs and a specific ad
    - If sufficient, tries to get FID and add back to webhook
 
 **Response Format**:
+
 ```json
 {
   "success": true,
@@ -62,7 +67,7 @@ Added a new API endpoint to check token allowances for 23 FIDs and a specific ad
       "hasSufficientBalance": true,
       "canAddBack": true,
       "status": "ready"
-    },
+    }
     // ... more results
   ],
   "usersAddedBack": [
@@ -83,12 +88,14 @@ Added a new API endpoint to check token allowances for 23 FIDs and a specific ad
 
 **Location**: `backend-only/check-allowances.js`
 
-**Purpose**: 
+**Purpose**:
+
 - Can be run independently to check allowances without modifying webhook
 - Useful for debugging and manual checks
 - Doesn't require the server to be running
 
 **Usage**:
+
 ```bash
 cd backend-only
 node check-allowances.js
@@ -103,7 +110,8 @@ node check-allowances.js
 **Active Users** = Users in `follow.created.target_fids` webhook filter
 
 ### Criteria for Active User:
-1. ✅ User has approved token allowance to EcionBatch contract (`allowance > 0`)
+
+1. ✅ User has approved token allowance to Tip FlowBatch contract (`allowance > 0`)
 2. ✅ `allowance >= minTip` (where `minTip = likeAmount + recastAmount + replyAmount`)
 3. ✅ `balance >= minTip` (user has enough token balance)
 4. ✅ User is in `webhook_config.tracked_fids` database table
@@ -112,6 +120,7 @@ node check-allowances.js
 ### When Users Get Removed:
 
 Users are automatically removed from active status if:
+
 - `allowance < minTip` (insufficient allowance)
 - `balance < minTip` (insufficient balance)
 - Error checking allowance/balance
@@ -121,6 +130,7 @@ This happens in the `getActiveUsers()` function which runs every 2 minutes via p
 ### When Users Get Added:
 
 Users are automatically added when:
+
 - User approves token allowance via frontend (`/api/update-allowance`)
 - Backend checks and finds `allowance >= minTip` AND `balance >= minTip`
 - `addFidToWebhook(fid)` is called
@@ -132,11 +142,13 @@ Users are automatically added when:
 ### Check Allowances and Restore Users
 
 **Production**:
+
 ```bash
 curl https://tippit-production.up.railway.app/api/check-allowances-and-restore
 ```
 
 **Local**:
+
 ```bash
 curl http://localhost:3001/api/check-allowances-and-restore
 ```
@@ -160,6 +172,7 @@ node check-allowances.js
 ## Important Notes
 
 1. **No Logic Changes**: All existing logic remains unchanged. This endpoint only:
+
    - Checks allowances
    - Adds users back if they qualify
    - Provides diagnostic information
@@ -186,6 +199,7 @@ To test the endpoint:
 If users are not being added back:
 
 1. Check `results` array for each user:
+
    - `hasSufficientAllowance`: Should be `true`
    - `hasSufficientBalance`: Should be `true`
    - `canAddBack`: Should be `true`
@@ -213,6 +227,7 @@ If users are not being added back:
 **Date**: 2025-01-30
 
 **Changes**:
+
 - Added `/api/check-allowances-and-restore` endpoint
 - Created `check-allowances.js` script
 - No breaking changes to existing functionality

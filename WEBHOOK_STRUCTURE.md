@@ -5,6 +5,7 @@
 The Neynar webhook subscription has **3 event types**, each serving a specific purpose:
 
 ### 1. **`follow.created`** - Active Users List
+
 ```json
 {
   "follow.created": {
@@ -12,11 +13,13 @@ The Neynar webhook subscription has **3 event types**, each serving a specific p
   }
 }
 ```
+
 - **Purpose**: Track follows of active users
 - **Contains**: FIDs of users with sufficient allowance & balance
 - **This is the authoritative list of "Active Users"**
 
 ### 2. **`cast.created`** - Reply Tracking
+
 ```json
 {
   "cast.created": {
@@ -24,10 +27,12 @@ The Neynar webhook subscription has **3 event types**, each serving a specific p
   }
 }
 ```
+
 - **Purpose**: Track replies to active users' latest casts
 - **Contains**: Latest cast hash for each active user
 
 ### 3. **`reaction.created`** - Like/Recast Tracking
+
 ```json
 {
   "reaction.created": {
@@ -35,6 +40,7 @@ The Neynar webhook subscription has **3 event types**, each serving a specific p
   }
 }
 ```
+
 - **Purpose**: Track likes and recasts on active users' latest casts
 - **Contains**: Same cast hashes as `cast.created`
 
@@ -45,7 +51,8 @@ The Neynar webhook subscription has **3 event types**, each serving a specific p
 **Active Users** = Users in `follow.created.target_fids`
 
 A user is active when:
-- ✅ `allowance > 0` (approved tokens to EcionBatch contract)
+
+- ✅ `allowance > 0` (approved tokens to Tip FlowBatch contract)
 - ✅ `allowance >= minTip` (enough allowance for at least one tip)
 - ✅ `balance >= minTip` (enough token balance for at least one tip)
 - ✅ `is_tracking = true` in database
@@ -81,6 +88,7 @@ A user is active when:
 ## 📝 Key Functions
 
 ### `addFidToWebhook(fid)`
+
 ```javascript
 // Adds FID to follow.created (active users)
 // Gets all latest cast hashes
@@ -91,6 +99,7 @@ A user is active when:
 ```
 
 ### `removeFidFromWebhook(fid)`
+
 ```javascript
 // 1. Remove FID from follow.created (active users)
 // 2. Get user's latest_cast_hash from database
@@ -99,6 +108,7 @@ A user is active when:
 ```
 
 ### `removeUserFromTracking(userAddress, fid)`
+
 ```javascript
 // 1. Set is_tracking=false in database
 // 2. Call removeFidFromWebhook(fid)
@@ -107,6 +117,7 @@ A user is active when:
 ```
 
 ### `getActiveUsers()`
+
 ```javascript
 // Called every 2 minutes by polling
 // For each user with is_tracking=true:
@@ -122,11 +133,12 @@ A user is active when:
 ## 🚨 Restoring the 23 Deleted Users
 
 ### Method 1: SQL Script (Fastest) ⚡
+
 ```sql
 -- Run this in Railway Database → Query tab
 -- File: backend-only/restore-users.sql
 
-UPDATE user_profiles 
+UPDATE user_profiles
 SET is_tracking = true, updated_at = NOW()
 WHERE fid IN (
   249432, 15086, 250869, 564447, 1052964, 200375, 849116, 1161826,
@@ -136,11 +148,13 @@ WHERE fid IN (
 ```
 
 After running:
+
 - Backend will poll and check funds
 - Users with sufficient funds → Added to `follow.created`
 - Users without funds → Removed again automatically
 
 ### Method 2: Node Script
+
 ```bash
 # SSH into Railway backend
 cd backend-only
@@ -148,6 +162,7 @@ node restore-users.js
 ```
 
 ### Method 3: API Endpoint
+
 ```bash
 curl https://tippit-production.up.railway.app/api/restore-deleted-users
 ```
@@ -157,6 +172,7 @@ curl https://tippit-production.up.railway.app/api/restore-deleted-users
 ## 🔍 Verifying Active Users
 
 ### Check Database
+
 ```sql
 SELECT fid, user_address, username, is_tracking
 FROM user_profiles
@@ -164,6 +180,7 @@ WHERE is_tracking = true;
 ```
 
 ### Check Webhook Config
+
 ```sql
 SELECT tracked_fids
 FROM webhook_config
@@ -172,7 +189,9 @@ LIMIT 1;
 ```
 
 ### Check Logs
+
 Look for:
+
 ```
 ✅ ACTIVE: <address> (FID: <fid>) - allowance: X, balance: Y, minTip: Z
 🚫 REMOVING: <address> (FID: <fid>) - allowance: X, balance: Y, minTip: Z
@@ -182,10 +201,10 @@ Look for:
 
 ## 📊 Summary
 
-| Webhook Event | Purpose | Contains |
-|--------------|---------|----------|
-| `follow.created.target_fids` | **Active Users** | FIDs with sufficient funds |
-| `cast.created.parent_hashes` | Reply tracking | Latest cast hashes |
-| `reaction.created.target_cast_hashes` | Like/Recast tracking | Latest cast hashes |
+| Webhook Event                         | Purpose              | Contains                   |
+| ------------------------------------- | -------------------- | -------------------------- |
+| `follow.created.target_fids`          | **Active Users**     | FIDs with sufficient funds |
+| `cast.created.parent_hashes`          | Reply tracking       | Latest cast hashes         |
+| `reaction.created.target_cast_hashes` | Like/Recast tracking | Latest cast hashes         |
 
 **The single source of truth for active users is `follow.created.target_fids`** ✅

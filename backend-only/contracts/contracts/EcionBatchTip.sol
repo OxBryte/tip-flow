@@ -4,7 +4,7 @@ pragma solidity ^0.8.30;
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract EcionBatchTip is Ownable {
+contract Tip FlowBatchTip is Ownable {
     
     event BatchTipExecuted(
         uint256 totalTransfers,

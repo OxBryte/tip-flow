@@ -1,22 +1,30 @@
-import { motion } from 'framer-motion';
-import { useLeaderboardData } from '@/hooks/usePIT';
-import { formatAmount } from '@/utils/contracts';
-import { Trophy, Medal, Award, Crown, Star, Share2 } from 'lucide-react';
-import { useState, useEffect } from 'react';
-import LoadingSpinner from '@/components/LoadingSpinner';
-import { useFarcasterWallet } from '@/hooks/useFarcasterWallet';
-import { useFarcasterSDK } from '@/hooks/useFarcasterSDK';
-import { useFarcasterEmbed } from '@/hooks/useFarcasterEmbed';
+import { motion } from "framer-motion";
+import { useLeaderboardData } from "@/hooks/usePIT";
+import { formatAmount } from "@/utils/contracts";
+import { Trophy, Medal, Award, Crown, Star, Share2 } from "lucide-react";
+import { useState, useEffect } from "react";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import { useFarcasterWallet } from "@/hooks/useFarcasterWallet";
+import { useFarcasterSDK } from "@/hooks/useFarcasterSDK";
+import { useFarcasterEmbed } from "@/hooks/useFarcasterEmbed";
 
 export default function Leaderboard() {
-  const [timeFilter, setTimeFilter] = useState<'24h' | '7d' | '30d'>('24h');
-  const { tippers, earners, userStats, isLoading, isLoadingMore, hasMore, loadMore } = useLeaderboardData(timeFilter);
+  const [timeFilter, setTimeFilter] = useState<"24h" | "7d" | "30d">("24h");
+  const {
+    tippers,
+    earners,
+    userStats,
+    isLoading,
+    isLoadingMore,
+    hasMore,
+    loadMore,
+  } = useLeaderboardData(timeFilter);
   const [mounted, setMounted] = useState(false);
-  const [activeTab, setActiveTab] = useState<'tipped' | 'earned'>('tipped');
+  const [activeTab, setActiveTab] = useState<"tipped" | "earned">("tipped");
   const { currentUser: walletUser } = useFarcasterWallet();
   const { currentUser: sdkUser, isLoading: sdkLoading } = useFarcasterSDK();
   const { handleShare } = useFarcasterEmbed();
-  
+
   // Use SDK user if available, otherwise fall back to wallet user
   const currentUser = sdkUser || walletUser;
 
@@ -48,7 +56,7 @@ export default function Leaderboard() {
       x: 0,
       opacity: 1,
       transition: {
-        type: 'spring',
+        type: "spring",
         stiffness: 300,
         damping: 24,
       },
@@ -56,35 +64,36 @@ export default function Leaderboard() {
   };
 
   const getRankIcon = (index: number) => {
-    return <span className="text-lg font-semibold text-gray-600">#{index + 1}</span>;
+    return (
+      <span className="text-lg font-semibold text-gray-600">#{index + 1}</span>
+    );
   };
 
   const getRankStyle = (index: number) => {
-    return 'bg-white hover:bg-gray-50 border border-gray-200';
+    return "bg-white hover:bg-gray-50 border border-gray-200";
   };
 
   return (
     <div className="space-y-4">
-
       {/* Tabs */}
       <div className="flex justify-center mb-6 mt-8">
         <div className="flex bg-white rounded-lg p-1 shadow-sm">
           <button
-            onClick={() => setActiveTab('tipped')}
+            onClick={() => setActiveTab("tipped")}
             className={`px-6 py-2 text-sm font-medium rounded-md transition-colors ${
-              activeTab === 'tipped'
-                ? 'bg-accent text-white'
-                : 'text-gray-600 hover:text-gray-900'
+              activeTab === "tipped"
+                ? "bg-accent text-white"
+                : "text-gray-600 hover:text-gray-900"
             }`}
           >
             Tipped
           </button>
           <button
-            onClick={() => setActiveTab('earned')}
+            onClick={() => setActiveTab("earned")}
             className={`px-6 py-2 text-sm font-medium rounded-md transition-colors ${
-              activeTab === 'earned'
-                ? 'bg-accent text-white'
-                : 'text-gray-600 hover:text-gray-900'
+              activeTab === "earned"
+                ? "bg-accent text-white"
+                : "text-gray-600 hover:text-gray-900"
             }`}
           >
             Earned
@@ -102,20 +111,20 @@ export default function Leaderboard() {
         {/* Title and Time Filter on Same Line */}
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-accent">
-            {activeTab === 'tipped' ? 'Tippers' : 'Earners'}
+            {activeTab === "tipped" ? "Tippers" : "Earners"}
           </h2>
-          
+
           <div className="flex items-center space-x-3">
             {/* Time Filter - Smaller */}
             <div className="flex space-x-1 bg-gray-100 rounded-lg p-1">
-              {(['24h', '7d', '30d'] as const).map((period) => (
+              {(["24h", "7d", "30d"] as const).map((period) => (
                 <button
                   key={period}
                   onClick={() => setTimeFilter(period)}
                   className={`px-3 py-1 text-xs font-medium rounded-md transition-colors ${
                     timeFilter === period
-                      ? 'bg-accent text-white'
-                      : 'text-gray-600 hover:text-gray-900'
+                      ? "bg-accent text-white"
+                      : "text-gray-600 hover:text-gray-900"
                   }`}
                 >
                   {period}
@@ -125,7 +134,6 @@ export default function Leaderboard() {
           </div>
         </div>
 
-        
         {/* You Section - Show if user is logged in (will show stats when loaded) */}
         {currentUser && (
           <div className="mb-6 p-4 bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-xl border border-yellow-200">
@@ -144,7 +152,8 @@ export default function Leaderboard() {
                   ) : (
                     <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
                       <span className="text-xs font-medium text-gray-600">
-                        {(currentUser.displayName || currentUser.username)?.[0]?.toUpperCase()}
+                        {(currentUser.displayName ||
+                          currentUser.username)?.[0]?.toUpperCase()}
                       </span>
                     </div>
                   )}
@@ -161,35 +170,57 @@ export default function Leaderboard() {
               <div className="flex items-center space-x-3">
                 <div className="text-right">
                   <p className="text-sm font-semibold text-gray-900">
-                    {userStats ? (
-                      activeTab === 'tipped' 
-                        ? (timeFilter === '24h' ? userStats.tippings24h :
-                           timeFilter === '7d' ? userStats.tippings7d : userStats.tippings30d).toFixed(2)
-                        : (timeFilter === '24h' ? userStats.earnings24h :
-                           timeFilter === '7d' ? userStats.earnings7d : userStats.earnings30d).toFixed(2)
-                    ) : (
-                      '0.00'
-                    )} USDC
+                    {userStats
+                      ? activeTab === "tipped"
+                        ? (timeFilter === "24h"
+                            ? userStats.tippings24h
+                            : timeFilter === "7d"
+                            ? userStats.tippings7d
+                            : userStats.tippings30d
+                          ).toFixed(2)
+                        : (timeFilter === "24h"
+                            ? userStats.earnings24h
+                            : timeFilter === "7d"
+                            ? userStats.earnings7d
+                            : userStats.earnings30d
+                          ).toFixed(2)
+                      : "0.00"}{" "}
+                    USDC
                   </p>
                   <p className="text-xs text-gray-500">
-                    {activeTab === 'tipped' ? 'tipped' : 'earned'}
+                    {activeTab === "tipped" ? "tipped" : "earned"}
                   </p>
                 </div>
                 <button
                   onClick={async () => {
                     if (!currentUser?.fid) return;
-                    
-                    const shareUrl = `https://ecion.vercel.app/share/${currentUser.fid}?time=${timeFilter}&type=${activeTab === 'tipped' ? 'tippings' : 'earnings'}`;
-                    
+
+                    const shareUrl = `https://Tip Flow.vercel.app/share/${
+                      currentUser.fid
+                    }?time=${timeFilter}&type=${
+                      activeTab === "tipped" ? "tippings" : "earnings"
+                    }`;
+
                     // Get the amount for the share text
-                    const amount = activeTab === 'tipped' 
-                      ? (timeFilter === '24h' ? userStats?.tippings24h :
-                         timeFilter === '7d' ? userStats?.tippings7d : userStats?.tippings30d)
-                      : (timeFilter === '24h' ? userStats?.earnings24h :
-                         timeFilter === '7d' ? userStats?.earnings7d : userStats?.earnings30d);
-                    
-                    const shareText = `I ${activeTab === 'tipped' ? 'tipped' : 'earned'} ${amount?.toFixed(2) || '0'} USDC in ${timeFilter} on Ecion`;
-                    
+                    const amount =
+                      activeTab === "tipped"
+                        ? timeFilter === "24h"
+                          ? userStats?.tippings24h
+                          : timeFilter === "7d"
+                          ? userStats?.tippings7d
+                          : userStats?.tippings30d
+                        : timeFilter === "24h"
+                        ? userStats?.earnings24h
+                        : timeFilter === "7d"
+                        ? userStats?.earnings7d
+                        : userStats?.earnings30d;
+
+                    const shareText = `I ${
+                      activeTab === "tipped" ? "tipped" : "earned"
+                    } ${
+                      amount?.toFixed(2) || "0"
+                    } USDC in ${timeFilter} on Tip Flow`;
+
                     // Use composeCast to share with embed preview
                     await handleShare(shareText, shareUrl);
                   }}
@@ -202,7 +233,7 @@ export default function Leaderboard() {
             </div>
           </div>
         )}
-        
+
         {isLoading ? (
           <div className="space-y-2">
             {[1, 2, 3, 4, 5].map((i) => (
@@ -228,14 +259,14 @@ export default function Leaderboard() {
               </div>
             ))}
           </div>
-        ) : (activeTab === 'earned' ? earners : tippers).length === 0 ? (
+        ) : (activeTab === "earned" ? earners : tippers).length === 0 ? (
           <div className="text-center py-12 text-gray-500">
             <p className="text-lg">No tips received yet!</p>
             <p className="mt-2">Start engaging to earn tips</p>
           </div>
         ) : (
           <div className="space-y-3">
-            {(activeTab === 'earned' ? earners : tippers).map((user, index) => (
+            {(activeTab === "earned" ? earners : tippers).map((user, index) => (
               <motion.div
                 key={user.fid}
                 variants={itemVariants}
@@ -246,7 +277,9 @@ export default function Leaderboard() {
               >
                 <div className="flex items-center space-x-3">
                   <div className="flex items-center justify-center w-6">
-                    <span className="text-sm font-semibold text-gray-600">#{index + 1}</span>
+                    <span className="text-sm font-semibold text-gray-600">
+                      #{index + 1}
+                    </span>
                   </div>
                   <div className="flex items-center space-x-2">
                     {user.pfpUrl ? (
@@ -258,16 +291,19 @@ export default function Leaderboard() {
                     ) : (
                       <div className="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center">
                         <span className="text-xs font-medium text-gray-600">
-                          {(user.displayName || user.username)?.[0]?.toUpperCase()}
+                          {(user.displayName ||
+                            user.username)?.[0]?.toUpperCase()}
                         </span>
                       </div>
                     )}
                     <div>
                       <p className="font-medium text-sm text-gray-900">
-                        {user.displayName || user.username || 'Unknown User'}
+                        {user.displayName || user.username || "Unknown User"}
                       </p>
                       <p className="text-xs text-gray-500">
-                        {user.username ? `@${user.username}` : `FID ${user.fid}`}
+                        {user.username
+                          ? `@${user.username}`
+                          : `FID ${user.fid}`}
                       </p>
                     </div>
                   </div>
@@ -277,31 +313,32 @@ export default function Leaderboard() {
                     {user.totalAmount.toFixed(2)} USDC
                   </p>
                   <p className="text-xs text-gray-500">
-                    {activeTab === 'tipped' ? 'tipped' : 'earned'}
+                    {activeTab === "tipped" ? "tipped" : "earned"}
                   </p>
                 </div>
               </motion.div>
             ))}
-            
+
             {/* Load More Button - Only show if there are 10+ users */}
-            {hasMore && (activeTab === 'tipped' ? tippers : earners).length >= 10 && (
-              <div className="flex justify-center mt-4">
-                <button
-                  onClick={loadMore}
-                  disabled={isLoadingMore}
-                  className="bg-gray-100 text-gray-700 px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-gray-200"
-                >
-                  {isLoadingMore ? (
-                    <div className="flex items-center space-x-2">
-                      <div className="animate-spin rounded-full h-3 w-3 border-2 border-gray-400 border-t-gray-600"></div>
-                      <span>Loading...</span>
-                    </div>
-                  ) : (
-                    'Load More'
-                  )}
-                </button>
-              </div>
-            )}
+            {hasMore &&
+              (activeTab === "tipped" ? tippers : earners).length >= 10 && (
+                <div className="flex justify-center mt-4">
+                  <button
+                    onClick={loadMore}
+                    disabled={isLoadingMore}
+                    className="bg-gray-100 text-gray-700 px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-gray-200"
+                  >
+                    {isLoadingMore ? (
+                      <div className="flex items-center space-x-2">
+                        <div className="animate-spin rounded-full h-3 w-3 border-2 border-gray-400 border-t-gray-600"></div>
+                        <span>Loading...</span>
+                      </div>
+                    ) : (
+                      "Load More"
+                    )}
+                  </button>
+                </div>
+              )}
           </div>
         )}
       </motion.div>

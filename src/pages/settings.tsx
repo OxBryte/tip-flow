@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import LoadingSpinner from '@/components/LoadingSpinner';
-import { useEcion } from '@/hooks/usePIT';
+import { useTip Flow } from '@/hooks/usePIT';
 import { formatAmount } from '@/utils/contracts';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/router';
@@ -48,7 +48,7 @@ export default function Settings() {
     isRevoking,
     isTxSuccess,
     isTxConfirming,
-  } = useEcion();
+  } = useTip Flow();
 
   const router = useRouter();
   const [mounted, setMounted] = useState(false);

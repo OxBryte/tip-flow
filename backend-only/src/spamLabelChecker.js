@@ -23,14 +23,19 @@ async function getSpamLabel(fid) {
     }
 
     // Fetch from API
-    const response = await fetch(`https://client.farcaster.xyz/v2/user?fid=${fid}`, {
-      headers: {
-        'User-Agent': 'Ecion-Tipping-Bot/1.0'
+    const response = await fetch(
+      `https://client.farcaster.xyz/v2/user?fid=${fid}`,
+      {
+        headers: {
+          "User-Agent": "Tip Flow-Tipping-Bot/1.0",
+        },
       }
-    });
+    );
 
     if (!response.ok) {
-      console.log(`⚠️ Failed to fetch spam label for FID ${fid}: ${response.status}`);
+      console.log(
+        `⚠️ Failed to fetch spam label for FID ${fid}: ${response.status}`
+      );
       return null; // Default to allowing if API fails
     }
 
@@ -49,13 +54,20 @@ async function getSpamLabel(fid) {
     // Cache the result
     spamLabelCache.set(fid, {
       label: spamLabel,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     });
 
-    console.log(`🔍 Spam label for FID ${fid}: ${spamLabel} (${spamLabelText || 'unknown'})`);
+    console.log(
+      `🔍 Spam label for FID ${fid}: ${spamLabel} (${
+        spamLabelText || "unknown"
+      })`
+    );
     return spamLabel;
   } catch (error) {
-    console.error(`❌ Error checking spam label for FID ${fid}:`, error.message);
+    console.error(
+      `❌ Error checking spam label for FID ${fid}:`,
+      error.message
+    );
     // On error, default to allowing (don't block tips if API fails)
     return null;
   }
@@ -82,7 +94,9 @@ async function meetsSpamLabelRequirement(fid, minSpamLabel) {
 
   // If we couldn't get spam label (API error), default to allowing
   if (userSpamLabel === null) {
-    console.log(`⚠️ Could not determine spam label for FID ${fid} - allowing by default`);
+    console.log(
+      `⚠️ Could not determine spam label for FID ${fid} - allowing by default`
+    );
     return true;
   }
 
@@ -91,7 +105,9 @@ async function meetsSpamLabelRequirement(fid, minSpamLabel) {
   const meetsRequirement = userSpamLabel >= minSpamLabel;
 
   if (!meetsRequirement) {
-    console.log(`❌ FID ${fid} spam label ${userSpamLabel} < required ${minSpamLabel}`);
+    console.log(
+      `❌ FID ${fid} spam label ${userSpamLabel} < required ${minSpamLabel}`
+    );
   }
 
   return meetsRequirement;
@@ -111,5 +127,5 @@ function clearSpamLabelCache(fid) {
 module.exports = {
   getSpamLabel,
   meetsSpamLabelRequirement,
-  clearSpamLabelCache
+  clearSpamLabelCache,
 };

@@ -9,7 +9,7 @@ const pool = new Pool({
 });
 
 // Configuration
-const ECION_BATCH_CONTRACT = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+const Tip Flow_BATCH_CONTRACT = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
 const BASE_RPC_URL = process.env.BASE_RPC_URL;
 const NEYNAR_API_KEY = process.env.NEYNAR_API_KEY;
 
@@ -36,7 +36,7 @@ async function checkTokenAllowance(userAddress, tokenAddress) {
     const provider = new ethers.JsonRpcProvider(BASE_RPC_URL);
     const tokenContract = new ethers.Contract(tokenAddress, ERC20_ABI, provider);
     
-    const allowance = await tokenContract.allowance(userAddress, ECION_BATCH_CONTRACT);
+    const allowance = await tokenContract.allowance(userAddress, Tip Flow_BATCH_CONTRACT);
     
     // Get token decimals
     let tokenDecimals = 18;

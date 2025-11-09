@@ -35,7 +35,7 @@ abstract contract Ownable {
     }
 }
 
-contract EcionBatch is Ownable {
+contract Tip FlowBatch is Ownable {
     mapping(address => bool) private _executors;
 
     modifier onlyExecutor() {

@@ -43,7 +43,7 @@ async function checkFidAllowance(fid) {
     // Check allowance and balance
     const provider = await getProvider();
     const tokenAddress = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913'; // USDC on Base
-    const ecionBatchAddress = process.env.ECION_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
+    const Tip FlowBatchAddress = process.env.Tip Flow_BATCH_CONTRACT_ADDRESS || '0x2f47bcc17665663d1b63e8d882faa0a366907bb8';
     
     const tokenContract = new ethers.Contract(tokenAddress, [
       "function allowance(address owner, address spender) view returns (uint256)",
@@ -51,7 +51,7 @@ async function checkFidAllowance(fid) {
     ], provider);
     
     const [allowance, balance] = await Promise.all([
-      tokenContract.allowance(userAddress, ecionBatchAddress),
+      tokenContract.allowance(userAddress, Tip FlowBatchAddress),
       tokenContract.balanceOf(userAddress)
     ]);
     
@@ -61,7 +61,7 @@ async function checkFidAllowance(fid) {
     
     console.log(`\n💰 Token Info:`);
     console.log(`  - Token: USDC (${tokenAddress})`);
-    console.log(`  - Contract: ${ecionBatchAddress}`);
+    console.log(`  - Contract: ${Tip FlowBatchAddress}`);
     console.log(`  - Allowance: ${allowanceAmount} USDC`);
     console.log(`  - Balance: ${balanceAmount} USDC`);
     

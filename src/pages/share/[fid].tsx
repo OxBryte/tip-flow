@@ -172,7 +172,7 @@ export default function SharePage({
 
           {/* Stats */}
           <div className="bg-slate-900/80 rounded-xl p-6 mb-6 border border-slate-700">
-            <h2 className="text-3xl font-bold text-yellow-800 mb-2">
+            <h2 className="text-3xl font-bold text-accent mb-2">
               {amount.toFixed(2)} USDC
             </h2>
             <p className="text-yellow-700 text-lg">

@@ -199,7 +199,7 @@ export default function Home() {
             <button
               onClick={handleGetStarted}
               disabled={walletLoading}
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:opacity-50"
+              className="bg-accent text-accent-foreground px-6 py-3 rounded-lg font-medium hover:bg-accent/90 transition-colors disabled:opacity-50"
             >
               {walletLoading ? "Connecting..." : "Get Started"}
             </button>

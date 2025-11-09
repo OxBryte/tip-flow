@@ -125,7 +125,7 @@ export default function Home() {
           content="https://Tip Flow.vercel.app/og-image.png"
         />
       </Head>
-      <div className="max-w-4xl mx-auto px-4 py-8 bg-yellow-50 min-h-screen">
+      <div className="max-w-4xl mx-auto px-4 py-8 min-h-screen">
         {/* Hero Section */}
         <div className="text-center py-6 relative">
           <button

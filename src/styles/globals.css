@@ -83,6 +83,9 @@
   .text-gray-900 {
     color: hsl(var(--foreground)) !important;
   }
+  .text-gray-700 {
+    color: rgba(226, 232, 240, 0.85) !important;
+  }
 }
 
 @layer components {

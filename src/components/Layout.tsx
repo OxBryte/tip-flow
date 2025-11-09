@@ -100,7 +100,7 @@ export default function Layout({ children }: LayoutProps) {
               {/* FID Display and Neynar Score */}
               {isConnected && currentUser?.fid && (
                 <div className="absolute right-4 text-right">
-                  <div className="text-sm font-medium text-gray-700">
+              <div className="text-sm font-medium text-slate-300">
                     FID: {currentUser.fid}
                   </div>
                   {neynarScore !== null && (

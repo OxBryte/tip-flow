@@ -136,7 +136,7 @@ export default function Leaderboard() {
 
         {/* You Section - Show if user is logged in (will show stats when loaded) */}
         {currentUser && (
-          <div className="mb-6 p-4 bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-xl border border-yellow-200">
+          <div className="mb-6 p-4 bg-gradient-to-r from-slate-900/80 to-slate-800/60 rounded-xl border border-yellow-200">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <div className="flex items-center justify-center w-6">

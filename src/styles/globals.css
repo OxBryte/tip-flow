@@ -90,7 +90,7 @@
 
 ::-moz-selection {
   background-color: #312e81;
-  color: #000000;
+  color: #f8fafc;
 }
 
 /* Override any default focus outlines that might show yellow */

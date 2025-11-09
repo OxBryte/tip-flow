@@ -52,7 +52,7 @@
   }
 
   .card-shadow {
-    @apply shadow-[0_4px_20px_rgba(65,105,225,0.2)];
+    @apply shadow-[0_4px_24px_rgba(99,102,241,0.18)];
   }
 
   .text-gradient {

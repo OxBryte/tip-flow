@@ -120,7 +120,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   ${avatarImage}
   
   <!-- User name -->
-  <text x="400" y="280" font-family="Arial, sans-serif" font-size="56" font-weight="bold" fill="#000">${displayName}</text>
+  <text x="400" y="280" font-family="Arial, sans-serif" font-size="56" font-weight="bold" fill="#F8FAFC">${displayName}</text>
   <text x="400" y="330" font-family="Arial, sans-serif" font-size="36" fill="#333">@${username}</text>
   
   <!-- Amount - Large and prominent -->

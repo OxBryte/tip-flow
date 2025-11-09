@@ -13,7 +13,7 @@ module.exports = {
         secondary: '#38bdf8',
         background: '#030712',
         foreground: '#f8fafc',
-        card: '#FFFFFF',
+        card: '#0f172a',
         'card-foreground': '#000000',
         border: '#4169E1',
         accent: '#4169E1',

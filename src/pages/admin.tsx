@@ -329,7 +329,7 @@ export default function Admin() {
             </motion.div>
           </>
         ) : (
-          <div className="bg-white border border-yellow-200 text-yellow-800 px-4 py-3 rounded mb-8 text-center">
+          <div className="bg-white border border-yellow-200 text-accent px-4 py-3 rounded mb-8 text-center">
             No statistics available yet. Tips will appear here once activity is
             tracked.
           </div>

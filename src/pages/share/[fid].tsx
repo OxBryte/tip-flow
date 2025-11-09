@@ -175,7 +175,7 @@ export default function SharePage({
             <h2 className="text-3xl font-bold text-accent mb-2">
               {amount.toFixed(2)} USDC
             </h2>
-            <p className="text-yellow-700 text-lg">
+            <p className="text-slate-300 text-lg">
               {type === "earnings" ? "Earned" : "Tipped"} in {timeLabel}
             </p>
           </div>

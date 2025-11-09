@@ -98,6 +98,9 @@
   .text-gray-300 {
     color: rgba(203, 213, 225, 0.75) !important;
   }
+  .text-green-800 {
+    color: #34d399 !important;
+  }
 }
 
 @layer components {

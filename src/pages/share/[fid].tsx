@@ -155,7 +155,7 @@ export default function SharePage({
         />
       </Head>
 
-      <div className="min-h-screen bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-background via-slate-950 to-slate-900 flex items-center justify-center p-4">
         <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full text-center">
           {/* User Profile */}
           <div className="mb-6">

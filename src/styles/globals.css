@@ -118,7 +118,7 @@ select:focus {
   
   /* Ensure loading states are visible during restoration */
   .loading-container {
-    background-color: #fef3c7;
+    background-color: #0f172a;
     min-height: 100vh;
     min-height: 100dvh;
   }

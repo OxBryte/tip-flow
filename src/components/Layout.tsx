@@ -85,7 +85,7 @@ export default function Layout({ children }: LayoutProps) {
           content='{"version":"1","imageUrl":"https://Tip Flow.vercel.app/og-image.png","button":{"title":"Start Tipping","action":{"type":"launch_frame","name":"Tip Flow","url":"https://Tip Flow.vercel.app","splashImageUrl":"https://Tip Flow.vercel.app/splash.png","splashBackgroundColor":"#fef3c7"}}}'
         />
       </Head>
-      <div className="min-h-screen bg-yellow-50 flex flex-col">
+      <div className="min-h-screen bg-gradient-to-b from-background via-slate-950 to-slate-950 text-card-foreground flex flex-col">
         {/* Header with Logo and FID */}
         <header className="border-b border-gray-100">
           <div className="max-w-4xl mx-auto px-4">

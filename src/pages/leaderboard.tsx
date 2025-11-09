@@ -140,7 +140,7 @@ export default function Leaderboard() {
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
                 <div className="flex items-center justify-center w-6">
-                  <span className="text-sm font-bold text-yellow-600">You</span>
+                  <span className="text-sm font-bold text-accent">You</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   {currentUser.pfpUrl ? (

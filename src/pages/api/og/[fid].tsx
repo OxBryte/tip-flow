@@ -101,7 +101,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           /"/g,
           "&quot;"
         )}" x="50" y="215" width="200" height="200" clip-path="url(#avatarClip)"/>`
-      : `<circle cx="150" cy="315" r="100" fill="#333"/>
+      : `<circle cx="150" cy="315" r="100" fill="#1E293B"/>
          <text x="150" y="335" font-family="Arial, sans-serif" font-size="80" fill="#fff" text-anchor="middle" font-weight="bold">${(
            username[0] || "U"
          ).toUpperCase()}</text>`;

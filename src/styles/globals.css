@@ -42,6 +42,9 @@
   }
 
   /* Dark mode remaps for legacy light theme utilities */
+  .bg-yellow-50 {
+    background-color: rgba(15, 23, 42, 0.85) !important;
+  }
 }
 
 @layer components {

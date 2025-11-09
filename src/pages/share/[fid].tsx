@@ -185,7 +185,7 @@ export default function SharePage({
             onClick={() =>
               router.push(`/leaderboard?userFid=${fid}&time=${time}`)
             }
-            className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-8 rounded-xl transition-colors duration-200 w-full"
+            className="bg-accent hover:bg-accent/85 text-accent-foreground font-bold py-3 px-8 rounded-xl transition-colors duration-200 w-full"
           >
             View Full Leaderboard
           </button>

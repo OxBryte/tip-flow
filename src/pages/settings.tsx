@@ -439,7 +439,7 @@ const [criteria, setCriteria] = useState({
 
   if (!mounted) {
     return (
-      <div className="min-h-screen bg-yellow-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <LoadingSpinner size="lg" />
       </div>
     );

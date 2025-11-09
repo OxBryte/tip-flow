@@ -45,6 +45,10 @@
   .bg-yellow-50 {
     background-color: rgba(15, 23, 42, 0.85) !important;
   }
+  .bg-white {
+    background-color: hsl(var(--card)) !important;
+    color: hsl(var(--card-foreground));
+  }
 }
 
 @layer components {

@@ -89,6 +89,9 @@
   .text-gray-600 {
     color: rgba(148, 163, 184, 0.9) !important;
   }
+  .text-gray-500 {
+    color: rgba(100, 116, 139, 0.85) !important;
+  }
 }
 
 @layer components {

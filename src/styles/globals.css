@@ -52,6 +52,9 @@
   .bg-gray-100 {
     background-color: rgba(30, 41, 59, 0.65) !important;
   }
+  .bg-gray-200 {
+    background-color: rgba(45, 55, 72, 0.6) !important;
+  }
 }
 
 @layer components {

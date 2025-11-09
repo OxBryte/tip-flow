@@ -79,7 +79,7 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-blue-600;
+  @apply bg-accent;
 }
 
 /* Override browser default selection and focus colors */

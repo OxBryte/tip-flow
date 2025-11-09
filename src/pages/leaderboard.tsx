@@ -224,7 +224,7 @@ export default function Leaderboard() {
                     // Use composeCast to share with embed preview
                     await handleShare(shareText, shareUrl);
                   }}
-                  className="p-2 text-gray-600 hover:text-yellow-600 hover:bg-yellow-200 rounded-lg transition-colors"
+                  className="p-2 text-gray-600 hover:text-accent hover:bg-slate-800/60 rounded-lg transition-colors"
                   title="Share your stats"
                 >
                   <Share2 size={16} />

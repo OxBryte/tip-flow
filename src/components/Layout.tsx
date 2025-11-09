@@ -136,11 +136,11 @@ export default function Layout({ children }: LayoutProps) {
                   <Link
                     key={page.href}
                     href={page.href}
-                    className={`flex items-center justify-center w-full h-full transition-colors ${
-                      isActive
-                        ? "text-blue-600"
-                        : "text-gray-500 hover:text-gray-700"
-                    }`}
+                  className={`flex items-center justify-center w-full h-full transition-colors ${
+                    isActive
+                      ? "text-accent"
+                      : "text-slate-400 hover:text-slate-200"
+                  }`}
                   >
                     <Icon className="w-6 h-6" />
                   </Link>

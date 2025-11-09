@@ -124,7 +124,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   <text x="400" y="330" font-family="Arial, sans-serif" font-size="36" fill="#94A3B8">@${username}</text>
   
   <!-- Amount - Large and prominent -->
-  <text x="400" y="430" font-family="Arial, sans-serif" font-size="96" font-weight="bold" fill="#000">${amountText} USDC</text>
+  <text x="400" y="430" font-family="Arial, sans-serif" font-size="96" font-weight="bold" fill="#6366F1">${amountText} USDC</text>
   
   <!-- Action text -->
   <text x="400" y="500" font-family="Arial, sans-serif" font-size="42" fill="#333">${actionText} in ${timeText}</text>

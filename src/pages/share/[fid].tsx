@@ -193,7 +193,7 @@ export default function SharePage({
           {/* Powered by */}
           <p className="text-gray-500 text-sm mt-6">
             Powered by{" "}
-            <span className="font-semibold text-yellow-600">Tip Flow</span>
+            <span className="font-semibold text-accent">Tip Flow</span>
           </p>
         </div>
       </div>

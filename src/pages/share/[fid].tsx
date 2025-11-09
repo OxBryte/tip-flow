@@ -162,7 +162,7 @@ export default function SharePage({
             <img
               src={userProfile.pfpUrl || "/default-avatar.png"}
               alt={userProfile.username}
-              className="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-yellow-400"
+              className="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-accent"
             />
             <h1 className="text-2xl font-bold text-gray-800 mb-2">
               {userProfile.displayName || userProfile.username}

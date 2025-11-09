@@ -1,0 +1,9 @@
+{
+  "userAddress": "0x3cf87b76d2a1d36f9542b4da2a6b4b3dc0f0bb2e",
+  "config": {
+    "tokenAddress": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+    "spendingLimit": "100",
+    "likeAmount": "0.01",
+    "replyAmount": "0.025"
+  }
+}

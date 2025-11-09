@@ -1,0 +1,32 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "NIXPACKS",
+    "buildCommand": "./build.sh",
+    "watchPatterns": [
+      "backend-only/src/**/*.js"
+    ]
+  },
+  "deploy": {
+    "startCommand": "cd backend-only && npm start",
+    "numReplicas": 1,
+    "sleepApplication": false,
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 10
+  },
+  "cache": {
+    "enabled": true,
+    "paths": [
+      "backend-only/node_modules",
+      "backend-only/package-lock.json",
+      "backend-only/package.json"
+    ]
+  },
+  "ignore": [
+    "backend-only-backup-*/**",
+    "backend-only/backend-only-backup-*/**",
+    "**/backend-only-backup-*/**",
+    "*.backup",
+    "*.sql"
+  ]
+}

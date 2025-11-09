@@ -1,0 +1,51 @@
+# Frontend files (not needed for backend deployment)
+src/
+public/
+.next/
+next.config.js
+tailwind.config.js
+postcss.config.js
+tsconfig.json
+vercel.json
+package.json
+
+# Development files
+.github/
+*.md
+.env.example
+test-config.json
+clear-blocklist*.js
+
+# Git files
+.git/
+.gitignore
+
+# Node modules (will be installed during build)
+node_modules/
+
+# Backup folders (not needed for deployment - EXCLUDE ALL BACKUP DIRS)
+backend-only-backup-*/
+backend-only-backup-*/
+**/backend-only-backup-*/
+**/*backup*/
+
+# Frontend node_modules
+node_modules/
+
+# Test files
+test-*.js
+*.test.js
+*.spec.js
+
+# Documentation
+*.md
+docs/
+
+# Contract files (if not needed)
+contracts/
+
+# Scripts that aren't needed for production
+scripts/
+
+# All backup directories recursively
+**/backup*/

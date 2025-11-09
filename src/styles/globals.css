@@ -49,6 +49,9 @@
     background-color: hsl(var(--card)) !important;
     color: hsl(var(--card-foreground));
   }
+  .bg-gray-100 {
+    background-color: rgba(30, 41, 59, 0.65) !important;
+  }
 }
 
 @layer components {

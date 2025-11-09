@@ -16,7 +16,7 @@ module.exports = {
         card: '#0f172a',
         'card-foreground': '#e2e8f0',
         border: '#1e293b',
-        accent: '#4169E1',
+        accent: '#6366f1',
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],

@@ -56,7 +56,7 @@
   }
 
   .text-gradient {
-    @apply bg-gradient-to-r from-accent to-blue-600 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-accent to-sky-400 bg-clip-text text-transparent;
   }
 
   .wavy-bg {

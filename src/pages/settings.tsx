@@ -555,7 +555,7 @@ const [criteria, setCriteria] = useState({
                             })
                           }
                           className={`relative w-11 h-6 rounded-full transition-colors ${
-                            isEnabled ? 'bg-yellow-400' : 'bg-gray-300'
+                            isEnabled ? 'bg-accent' : 'bg-gray-300'
                           }`}
                         >
                           <span

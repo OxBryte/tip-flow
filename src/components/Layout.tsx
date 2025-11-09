@@ -104,7 +104,7 @@ export default function Layout({ children }: LayoutProps) {
                     FID: {currentUser.fid}
                   </div>
                   {neynarScore !== null && (
-                    <div className="text-xs text-gray-500">
+                  <div className="text-xs text-slate-500">
                       Score: {neynarScore.toFixed(2)}
                     </div>
                   )}

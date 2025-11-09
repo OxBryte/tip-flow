@@ -87,7 +87,7 @@ export default function Layout({ children }: LayoutProps) {
       </Head>
       <div className="min-h-screen bg-gradient-to-b from-background via-slate-950 to-slate-950 text-card-foreground flex flex-col">
         {/* Header with Logo and FID */}
-        <header className="border-b border-gray-100">
+      <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur">
           <div className="max-w-4xl mx-auto px-4">
             <div className="flex justify-center items-center h-20 relative">
               <Image

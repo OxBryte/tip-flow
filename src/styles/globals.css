@@ -74,6 +74,9 @@
   .border-gray-200 {
     border-color: rgba(71, 85, 105, 0.6) !important;
   }
+  .border-blue-200 {
+    border-color: rgba(37, 99, 235, 0.45) !important;
+  }
 }
 
 @layer components {

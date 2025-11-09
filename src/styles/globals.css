@@ -40,6 +40,8 @@
     min-height: 100vh; /* Ensure Next.js root has full height */
     position: relative; /* Prevent blank screen on scroll */
   }
+
+  /* Dark mode remaps for legacy light theme utilities */
 }
 
 @layer components {

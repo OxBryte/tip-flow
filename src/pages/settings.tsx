@@ -447,7 +447,7 @@ const [criteria, setCriteria] = useState({
 
   if (!address) {
     return (
-      <div className="max-w-4xl mx-auto px-4 py-8 bg-yellow-50 min-h-full">
+      <div className="max-w-4xl mx-auto px-4 py-8 min-h-full">
         <div className="text-center py-12">
           <h1 className="text-2xl font-bold text-gray-900 mb-4">Connect Your Wallet</h1>
           <p className="text-gray-600 mb-8">Please connect your Farcaster wallet to configure tipping settings.</p>

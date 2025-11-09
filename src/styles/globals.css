@@ -84,7 +84,7 @@
 
 /* Override browser default selection and focus colors */
 ::selection {
-  background-color: #fef3c7;
+  background-color: #312e81;
   color: #000000;
 }
 

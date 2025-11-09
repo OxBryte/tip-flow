@@ -68,6 +68,9 @@
     background-color: rgba(22, 163, 74, 0.18) !important;
     color: #bbf7d0;
   }
+  .border-gray-100 {
+    border-color: rgba(51, 65, 85, 0.6) !important;
+  }
 }
 
 @layer components {

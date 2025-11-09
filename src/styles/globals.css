@@ -85,7 +85,7 @@
 /* Override browser default selection and focus colors */
 ::selection {
   background-color: #312e81;
-  color: #000000;
+  color: #f8fafc;
 }
 
 ::-moz-selection {

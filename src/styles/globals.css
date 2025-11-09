@@ -71,7 +71,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100;
+  @apply bg-slate-900;
 }
 
 ::-webkit-scrollbar-thumb {

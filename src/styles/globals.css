@@ -111,7 +111,7 @@ select:focus {
 @media screen and (max-width: 768px) {
   /* Prevent mobile browser from showing blank yellow during app restoration */
   body {
-    background-color: #fef3c7 !important;
+    background-color: #020617 !important;
     min-height: 100vh;
     min-height: 100dvh; /* Dynamic viewport height for mobile */
   }

@@ -78,7 +78,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         break;
     }
 
-    // Generate SVG image with bright yellow background
+    // Generate SVG image with dark indigo background
     // Use 1200x630 for better social media preview (standard OG image size)
     const displayName = (
       userProfile.displayName ||

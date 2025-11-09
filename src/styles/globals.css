@@ -61,6 +61,9 @@
   .bg-blue-50 {
     background-color: rgba(59, 130, 246, 0.12) !important;
   }
+  .bg-blue-200 {
+    background-color: rgba(37, 99, 235, 0.25) !important;
+  }
 }
 
 @layer components {

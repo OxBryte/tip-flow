@@ -419,7 +419,7 @@ export default function Admin() {
           <button
             onClick={fetchAdminData}
             disabled={isLoading}
-            className="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-medium py-2 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-accent hover:bg-accent/85 text-accent-foreground font-medium py-2 px-4 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading ? "Refreshing..." : "Refresh Data"}
           </button>
